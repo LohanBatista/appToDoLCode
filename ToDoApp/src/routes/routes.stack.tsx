@@ -1,8 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Home} from '';
+import {Home} from '~/screens/Home';
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
   const Stack = createNativeStackNavigator();
 
   return (
