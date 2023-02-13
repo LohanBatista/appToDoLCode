@@ -1,12 +1,16 @@
 import {View, Text} from 'react-native';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
-const index = () => {
+//Exemplo de utilização de styled componente
+import {Container, Title} from '~/screens/Exemplo1/styles';
+
+export const Index = () => {
+  const {t} = useTranslation();
+
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <Container>
+      <Title>{t('home.title')}</Title>
+    </Container>
   );
 };
-
-export default index;
