@@ -1,4 +1,5 @@
 import {Dimensions, PixelRatio} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 // Retrieve initial screen's width
 const screenWidth = Dimensions.get('window').width;
@@ -59,5 +60,5 @@ export const heightInPixelToDP = (heightInPixel: number) => {
 
 //FONTE
 export const fontInPixelToDP = (fontInPixel: number) => {
-  return fontInPixel / PixelRatio.getFontScale();
+  return RFValue(fontInPixel);
 };
