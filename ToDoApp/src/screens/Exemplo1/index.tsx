@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 //Exemplo de utilização de styled componente
 import {Container, Title} from '~/screens/Exemplo1/styles';
 
-const Index = () => {
+export const Index = () => {
   const {t} = useTranslation();
 
   return (
@@ -14,5 +14,3 @@ const Index = () => {
     </Container>
   );
 };
-
-export default Index;
