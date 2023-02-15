@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, TouchableOpacity, TextInput} from 'react-native';
 import {Container, InputComponent} from './styles';
 
 interface InputProps {

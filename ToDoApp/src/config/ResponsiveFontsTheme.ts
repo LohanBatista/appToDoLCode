@@ -19,7 +19,7 @@ const screenHeight = Dimensions.get('window').height;
  */
 
 //EIXO X
-export const widthInPixelToDP = (widthInPixel: number) => {
+const widthInPixelToDP = (widthInPixel: number) => {
   // Convert pixel to percentage
   const widthPercent = (widthInPixel * 100) / screenWidth;
 
@@ -39,7 +39,7 @@ export const widthInPixelToDP = (widthInPixel: number) => {
  */
 
 //EIXO Y
-export const heightInPixelToDP = (heightInPixel: number) => {
+const heightInPixelToDP = (heightInPixel: number) => {
   // Convert pixel to percentage
   const heightPercent = (heightInPixel * 100) / screenHeight;
 
@@ -59,6 +59,12 @@ export const heightInPixelToDP = (heightInPixel: number) => {
  */
 
 //FONTE
-export const fontInPixelToDP = (fontInPixel: number) => {
+const fontInPixelToDP = (fontInPixel: number) => {
   return RFValue(fontInPixel);
+};
+
+export const Responsive = {
+  widthInPixelToDP,
+  heightInPixelToDP,
+  fontInPixelToDP,
 };

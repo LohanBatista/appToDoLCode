@@ -1,18 +1,32 @@
 import React, {useState} from 'react';
-import {Text, TextInput, View} from 'react-native';
-import {Input} from '~/components/Input';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {InputHome} from '~/components/InputHome';
+import {Empty, Header, Logo, ViewColum, ViewTasks} from './styles';
+
+import AppEmpty from '~/assets/images/Empty.png';
+import AppLogo from '~/assets/images/Logo.png';
+import {NewTasks} from '~/components/NewTasks';
+import {DoneTasks} from '~/components/DoneTasks';
 
 export const Home: React.FC = () => {
-  const [text, setText] = useState('');
-
+  const [task, setTask] = useState('');
   return (
-    <View>
-      <Input
-        placeholder="Qualquer Coisa"
-        value={text}
-        onChangeText={(text: string) => setText(text)}
-      />
-      <Text>Hello</Text>
-    </View>
+    <SafeAreaView>
+      <ViewColum>
+        <Header>
+          <Logo source={AppLogo} />
+        </Header>
+        <InputHome
+          placeholder="Adicione uma nova tarefa"
+          value={task}
+          onChangeText={setTask}
+        />
+        <ViewTasks>
+          <NewTasks></NewTasks>
+          <DoneTasks></DoneTasks>
+        </ViewTasks>
+        <Empty source={AppEmpty} />
+      </ViewColum>
+    </SafeAreaView>
   );
 };
