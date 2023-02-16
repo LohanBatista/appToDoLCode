@@ -1,13 +1,14 @@
 import styled from 'styled-components/native';
+import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const DoneTask = styled.Text`
-  width: 78px;
-  height: 17px;
+  width: ${Responsive.widthInPixelToDP(78)}px;
+  height: ${Responsive.widthInPixelToDP(17)}px;
 
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 17px;
+  font-family: ${({theme}) => theme.fonts.inter_bold};
+
+  font-size: ${Responsive.fontInPixelToDP(14)}px;
+  line-height: ${Responsive.fontInPixelToDP(17)}px;
 
   color: ${({theme}) => theme.colors.purple};
 `;

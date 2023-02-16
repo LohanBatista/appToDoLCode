@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const ViewColum = styled.View`
   flex-direction: column;
@@ -26,10 +27,9 @@ export const Logo = styled.Image`
 `;
 export const Empty = styled.Image`
   position: absolute;
-  width: 350px;
-  height: 130px;
   top: 270px;
-  left: 17px;
+  width: ${Responsive.RFValue(320)}px;
+  left: ${Responsive.widthInPixelToDP(25)}px;
 `;
 export const ViewTasks = styled.View`
   flex-direction: row;

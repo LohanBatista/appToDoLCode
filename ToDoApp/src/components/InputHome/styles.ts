@@ -1,35 +1,34 @@
 import styled from 'styled-components/native';
+import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const Input = styled.TextInput`
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   align-items: center;
   padding: 16px;
-  gap: 8px;
+  /* gap: 8px; */
 
-  width: 271px;
-  height: 54px;
-
-  background-color: ${({theme}) => theme.colors.gray_500};
+  width: ${Responsive.widthInPixelToDP(271)}px;
+  height: ${Responsive.heightInPixelToDP(54)}px;
 
   background-color: ${({theme}) => theme.colors.gray_500};
 
-  border: 1px solid #0d0d0d;
   border-radius: 6px;
+  border: 1px solid ${({theme}) => theme.colors.gray_700};
 
   /* Inside auto layout */
 
-  flex: none;
-  order: 0;
-  flex-grow: 1;
+  /* flex: none; */
+  /* order: 0; */
+  /* flex-grow: 1; */
 `;
 export const Button = styled.TouchableOpacity`
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 18px;
-  gap: 8px;
+  /* gap: 8px; */
 
   width: 52px;
   height: 52px;

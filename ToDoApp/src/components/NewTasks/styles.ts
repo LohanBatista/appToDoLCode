@@ -7,7 +7,7 @@ export const NewTask = styled.Text`
 
   font-family: ${({theme}) => theme.fonts.inter_bold};
   font-size: ${Responsive.fontInPixelToDP(14)}px;
-  line-height: 17px;
+  line-height: ${Responsive.fontInPixelToDP(17)}px;
 
   color: ${({theme}) => theme.colors.blue};
 `;

@@ -1,12 +1,12 @@
-import {StatusBar} from 'expo-status-bar';
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {StatusBar} from 'react-native';
 import {ThemeProvider} from 'styled-components/native';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppRoutes} from '~/routes/routes.stack';
 
 import {useFonts, Inter_400Regular, Inter_700Bold} from '@expo-google-fonts/inter';
 import theme from './config/theme';
+import {Loader} from './components/Exemplos/LoaderExemplo';
 
 export default function App() {
   const [fontsLoaded] = useFonts({Inter_400Regular, Inter_700Bold});
@@ -14,7 +14,12 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <AppRoutes />
+        <StatusBar
+          translucent
+          barStyle={'light-content'}
+          backgroundColor={theme.colors.gray_700}
+        />
+        {fontsLoaded ? <AppRoutes /> : <Loader />}
       </NavigationContainer>
     </ThemeProvider>
   );
