@@ -2,11 +2,7 @@ import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const Input = styled.TextInput`
-  /* display: flex; */
-  flex-direction: row;
-  align-items: center;
   padding: 16px;
-  /* gap: 8px; */
 
   width: ${Responsive.widthInPixelToDP(271)}px;
   height: ${Responsive.heightInPixelToDP(54)}px;
@@ -15,23 +11,14 @@ export const Input = styled.TextInput`
 
   border-radius: 6px;
   border: 1px solid ${({theme}) => theme.colors.gray_700};
-
-  /* Inside auto layout */
-
-  /* flex: none; */
-  /* order: 0; */
-  /* flex-grow: 1; */
 `;
-export const Button = styled.TouchableOpacity`
-  /* display: flex; */
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 18px;
-  /* gap: 8px; */
 
-  width: 52px;
-  height: 52px;
+export const Button = styled.TouchableOpacity`
+  width: ${Responsive.widthInPixelToDP(52)}px;
+  height: ${Responsive.heightInPixelToDP(52)}px;
+
+  padding: 18px;
+  margin-left: 4px;
 
   border-radius: 6px;
 
@@ -40,7 +27,7 @@ export const Button = styled.TouchableOpacity`
 
 export const ViewInput = styled.View`
   flex-direction: row;
-  margin-top: 36%;
+  margin-top: 142px;
   margin-left: 24px;
-  margin-right: 27px;
+  margin-right: 24px;
 `;

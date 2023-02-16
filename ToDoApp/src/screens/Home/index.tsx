@@ -7,6 +7,7 @@ import AppEmpty from '~/assets/images/Empty.png';
 import AppLogo from '~/assets/images/Logo.png';
 import {NewTasks} from '~/components/NewTasks';
 import {DoneTasks} from '~/components/DoneTasks';
+import {Tasks} from '~/components/Tasks';
 
 export const Home: React.FC = () => {
   const [task, setTask] = useState('');
@@ -25,7 +26,7 @@ export const Home: React.FC = () => {
           <NewTasks></NewTasks>
           <DoneTasks></DoneTasks>
         </ViewTasks>
-        <Empty source={AppEmpty} />
+        <Tasks />
       </ViewColum>
     </SafeAreaView>
   );

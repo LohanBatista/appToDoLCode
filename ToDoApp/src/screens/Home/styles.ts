@@ -11,17 +11,14 @@ export const ViewColum = styled.View`
 export const Header = styled.View`
   position: absolute;
   width: 100%;
-  height: 173px;
-  left: 0px;
-  right: 0px;
-  top: 0px;
+  height: ${Responsive.heightInPixelToDP(173)}px;
 
   background-color: ${({theme}) => theme.colors.gray_700};
 `;
 export const Logo = styled.Image`
   position: absolute;
-  width: 110.34px;
-  height: 32px;
+  width: ${Responsive.widthInPixelToDP(110.34)}px;
+  height: ${Responsive.heightInPixelToDP(32)}px;
   top: 70px;
   left: 132px;
 `;
