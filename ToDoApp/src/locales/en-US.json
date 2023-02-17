@@ -1,7 +1,20 @@
 {
   "translation": {
-    "home": {
-      "title": "Hello"
+    "components": {
+      "newTasks": {
+        "title": "Created"
+      },
+      "doneTasks": {
+        "title": "Done"
+      }
+    },
+    "screens": {
+      "exemple": {
+        "title": "Hello world!"
+      },
+      "home": {
+        "placeholder": "Add a new task"
+      }
     }
   }
 }

@@ -1,33 +1,37 @@
 import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTranslation} from 'react-i18next';
 import {InputHome} from '~/components/InputHome';
-import {Empty, Header, Logo, ViewColum, ViewTasks} from './styles';
-
-import AppEmpty from '~/assets/images/Empty.png';
-import AppLogo from '~/assets/images/Logo.png';
+import {Tasks} from '~/components/Tasks';
 import {NewTasks} from '~/components/NewTasks';
 import {DoneTasks} from '~/components/DoneTasks';
-import {Tasks} from '~/components/Tasks';
+import AppLogo from '~/assets/images/Logo.png';
+import AppEmpty from '~/assets/images/Empty.png';
+import {Content, Empty, Header, Logo, ViewColum, Counters} from './styles';
 
 export const Home: React.FC = () => {
   const [task, setTask] = useState('');
+  const {t: translate} = useTranslation();
+
   return (
-    <SafeAreaView>
-      <ViewColum>
-        <Header>
-          <Logo source={AppLogo} />
-        </Header>
+    <ViewColum>
+      <Header>
+        <Logo source={AppLogo} />
+      </Header>
+
+      <Content>
         <InputHome
-          placeholder="Adicione uma nova tarefa"
           value={task}
           onChangeText={setTask}
+          placeholder={translate('screens.home.placeholder') || ''}
         />
-        <ViewTasks>
-          <NewTasks></NewTasks>
-          <DoneTasks></DoneTasks>
-        </ViewTasks>
+
+        <Counters>
+          <NewTasks />
+          <DoneTasks />
+        </Counters>
+
         <Tasks />
-      </ViewColum>
-    </SafeAreaView>
+      </Content>
+    </ViewColum>
   );
 };

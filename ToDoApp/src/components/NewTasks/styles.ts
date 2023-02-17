@@ -13,12 +13,13 @@ export const NewTask = styled.Text`
 `;
 
 export const ViewCount = styled.View`
-  width: ${Responsive.widthInPixelToDP(24)}px;
-  height: ${Responsive.widthInPixelToDP(19)}px;
   align-items: center;
 
-  border-radius: 999px;
-  margin-left: 8px;
+  width: ${Responsive.widthInPixelToDP(24)}px;
+  height: ${Responsive.widthInPixelToDP(19)}px;
+
+  margin-left: ${Responsive.RFValue(8)}px;
+  border-radius: ${Responsive.RFValue(999)}px;
 
   background-color: ${({theme}) => theme.colors.gray_400};
 `;
