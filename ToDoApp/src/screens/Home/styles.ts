@@ -4,9 +4,8 @@ import {Task} from '~/interfaces/task';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const ViewColum = styled.SafeAreaView`
+  flex: 1;
   background-color: ${({theme}) => theme.colors.gray_600};
-  width: 100%;
-  height: 100%;
 `;
 
 export const Header = styled.View`

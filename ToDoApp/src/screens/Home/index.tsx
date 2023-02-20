@@ -13,7 +13,7 @@ import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styl
 
 export const Home: React.FC = () => {
   const [task, setTask] = useState('');
-  const [list, setList] = useState<Task[]>([]);
+  const [list, setList] = useState([]);
   const {t: translate} = useTranslation();
   const [error, showError] = useState(false);
 
@@ -26,6 +26,9 @@ export const Home: React.FC = () => {
     setTask('');
   };
 
+  const amountedCreatedTasks = () => {
+    return DATA.length;
+  };
   const amountedDoneTasks = () => {
     const tasksDone = DATA.filter((task: Task) => task.isDone === true);
     return tasksDone.length;
@@ -49,20 +52,20 @@ export const Home: React.FC = () => {
           <InputHome
             value={task}
             onChangeText={setTask}
-            placeholder={translate('screens.home.placeholder') || ''}
             action={handleAddTask}
+            placeholder={translate('screens.home.placeholder') || ''}
           />
 
           <Counters>
-            <NewTasks count={DATA.length} />
+            <NewTasks count={amountedCreatedTasks()} />
             <DoneTasks count={amountedDoneTasks()} />
           </Counters>
 
-          {DATA.length === 0 && <Empty source={AppEmpty} />}
           <ListObj
             data={DATA}
             keyExtractor={(item) => String(item.id)}
             renderItem={({item}) => <Tasks descriptionTask={item.task} />}
+            ListEmptyComponent={<Empty source={AppEmpty} />}
           />
         </Content>
       </ViewColum>

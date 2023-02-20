@@ -7,7 +7,6 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding-top: ${RFValue(70)}px;
   ${({theme}) =>
     css`
       background-color: ${theme.colors.gray_700};
