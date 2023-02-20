@@ -39,3 +39,4 @@ export const Empty = styled.Image`
   width: ${Responsive.RFValue(320)}px;
   left: ${Responsive.widthInPixelToDP(25)}px;
 `;
+export const ListObj = styled.FlatList``;

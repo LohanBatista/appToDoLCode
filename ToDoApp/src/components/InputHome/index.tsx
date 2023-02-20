@@ -4,9 +4,11 @@ import {useTheme} from 'styled-components/native';
 import {Input, Button, ViewInput} from './styles';
 import IconButton from '~/assets/icons/plus.svg';
 
-interface InputHomeProps extends TextInputProps {}
+interface InputHomeProps extends TextInputProps {
+  action: Function;
+}
 
-export const InputHome = ({...rest}: InputHomeProps) => {
+export const InputHome = ({action, ...rest}: InputHomeProps) => {
   const [isActive, setActive] = useState(false);
   const [onPressed, setPressed] = useState(false);
   const theme = useTheme();
@@ -40,7 +42,7 @@ export const InputHome = ({...rest}: InputHomeProps) => {
       <Button
         isActive={onPressed}
         onPressIn={buttonPressed}
-        onPressOut={buttonIsNotPressed}>
+        onPressOut={() => [buttonIsNotPressed(), action()]}>
         <IconButton />
       </Button>
     </ViewInput>
