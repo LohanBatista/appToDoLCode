@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
-import {ViewTask, Task} from './styles';
+import {ViewTask, Task, Button} from './styles';
 
 interface TaskProp {
-  text: string;
-  feito: boolean;
+  descriptionTask: string;
+  isDone?: boolean;
 }
 
-export const Tasks = () => {
+export const Tasks = ({descriptionTask, isDone}: TaskProp) => {
   return (
-    <ViewTask>
-      <Task></Task>
-    </ViewTask>
+    <Button>
+      <ViewTask>
+        <Task>{descriptionTask}</Task>
+      </ViewTask>
+    </Button>
   );
 };

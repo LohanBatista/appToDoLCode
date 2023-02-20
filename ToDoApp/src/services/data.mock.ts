@@ -4,7 +4,7 @@ export const DATA: Task[] = [
   {
     id: 0,
     task: 'Comprar café',
-    isDone: false,
+    isDone: true,
     date: new Date(),
     timestamp: new Date().getTime(),
   },
@@ -25,7 +25,7 @@ export const DATA: Task[] = [
   {
     id: 4,
     task: 'Olhar One Piece',
-    isDone: false,
+    isDone: true,
     date: new Date(),
     timestamp: new Date().getTime(),
   },
@@ -39,7 +39,7 @@ export const DATA: Task[] = [
   {
     id: 6,
     task: 'Lavar roupas',
-    isDone: false,
+    isDone: true,
     date: new Date(),
     timestamp: new Date().getTime(),
   },

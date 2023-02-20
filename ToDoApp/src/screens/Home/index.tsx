@@ -7,11 +7,13 @@ import {NewTasks} from '~/components/NewTasks';
 import {DoneTasks} from '~/components/DoneTasks';
 import AppLogo from '~/assets/images/Logo.png';
 import AppEmpty from '~/assets/images/Empty.png';
+import {Task} from '~/interfaces/task';
+import {DATA} from '~/services/data.mock';
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
 
 export const Home: React.FC = () => {
   const [task, setTask] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<Task[]>([]);
   const {t: translate} = useTranslation();
   const [error, showError] = useState(false);
 
@@ -22,6 +24,11 @@ export const Home: React.FC = () => {
   const handleAddTask = () => {
     setList([...list, task]);
     setTask('');
+  };
+
+  const amountedDoneTasks = () => {
+    const tasksDone = DATA.filter((task: Task) => task.isDone === true);
+    return tasksDone.length;
   };
 
   useEffect(() => {
@@ -47,14 +54,16 @@ export const Home: React.FC = () => {
           />
 
           <Counters>
-            <NewTasks />
-            <DoneTasks />
+            <NewTasks count={DATA.length} />
+            <DoneTasks count={amountedDoneTasks()} />
           </Counters>
 
-          {list.length === 0 && <Empty source={AppEmpty} />}
-          <ListObj data={list} renderItem={Tasks} keyExtractor={(item) => item}>
-            <Tasks>{task}</Tasks>
-          </ListObj>
+          {DATA.length === 0 && <Empty source={AppEmpty} />}
+          <ListObj
+            data={DATA}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({item}) => <Tasks descriptionTask={item.task} />}
+          />
         </Content>
       </ViewColum>
     </PageViewComponent>

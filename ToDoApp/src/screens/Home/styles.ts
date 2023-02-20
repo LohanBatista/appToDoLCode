@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import {FlatList, FlatListProps} from 'react-native';
+import {Task} from '~/interfaces/task';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const ViewColum = styled.SafeAreaView`
@@ -39,4 +41,7 @@ export const Empty = styled.Image`
   width: ${Responsive.RFValue(320)}px;
   left: ${Responsive.widthInPixelToDP(25)}px;
 `;
-export const ListObj = styled.FlatList``;
+
+export const ListObj = styled(
+  FlatList as new (props: FlatListProps<Task>) => FlatList<Task>,
+)``;
