@@ -19,11 +19,6 @@ export default function App() {
     <I18nextProvider i18n={i18n}>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <StatusBar
-            translucent
-            barStyle={'light-content'}
-            backgroundColor={theme.colors.gray_700}
-          />
           {fontsLoaded ? <AppRoutes /> : <Loader />}
         </NavigationContainer>
       </ThemeProvider>

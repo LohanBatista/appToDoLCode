@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
 import {useTheme} from 'styled-components/native';
 import {Input, Button, ViewInput} from './styles';
+import IconButton from '~/assets/icons/plus.svg';
 
 interface InputHomeProps extends TextInputProps {}
 
@@ -39,8 +40,9 @@ export const InputHome = ({...rest}: InputHomeProps) => {
       <Button
         isActive={onPressed}
         onPressIn={buttonPressed}
-        onPressOut={buttonIsNotPressed}
-      />
+        onPressOut={buttonIsNotPressed}>
+        <IconButton />
+      </Button>
     </ViewInput>
   );
 };
