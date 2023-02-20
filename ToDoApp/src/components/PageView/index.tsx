@@ -14,7 +14,7 @@ export const PageViewComponent: React.FC<PageViewProps> = (props) => {
   const {isLoading, children} = props;
 
   const Loading = () => {
-    if (!isLoading) {
+    if (isLoading) {
       return (
         <>
           <LoaderView>
@@ -35,7 +35,7 @@ export const PageViewComponent: React.FC<PageViewProps> = (props) => {
       />
 
       <Loading />
-      {isLoading && children}
+      {!isLoading && children}
     </Container>
   );
 };
