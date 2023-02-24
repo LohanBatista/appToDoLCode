@@ -1,19 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ViewTask, Task, Button} from './styles';
 
-export interface ObjTask {
-  id: number;
+interface TaskComponentProps {
   taskDescription: string;
-  isDone: boolean;
-  //date: () => {};
-  //timestamp: (value: number) => void;
 }
 
-interface TaskProp {
-  task: ObjTask[];
-}
-
-export const Tasks = ({taskDescription}: ObjTask) => {
+export const Tasks = ({taskDescription}: TaskComponentProps) => {
   return (
     <Button>
       <ViewTask>

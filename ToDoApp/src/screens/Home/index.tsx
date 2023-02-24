@@ -8,18 +8,16 @@ import {DoneTasks} from '~/components/DoneTasks';
 import AppLogo from '~/assets/images/Logo.png';
 import AppEmpty from '~/assets/images/Empty.png';
 import {Task} from '~/interfaces/task';
-import {DATA} from '~/services/data.mock';
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
-//IMPORTES NOVOS
-
-import {ObjTask} from '~/components/Task';
 
 export const Home: React.FC = () => {
-  const listTask: ObjTask[] = [
+  const listTask: Task[] = [
     {
-      id: 0,
-      taskDescription: 'Task Com Index 0 e False Sem Dates',
+      id: '0',
+      description: 'Task Com Index 0 e False Sem Dates',
       isDone: false,
+      date: new Date(),
+      timestamp: new Date().getDate(),
     },
   ];
 
@@ -37,10 +35,10 @@ export const Home: React.FC = () => {
   };
 
   const amountedCreatedTasks = () => {
-    return DATA.length;
+    return listTask.length;
   };
   const amountedDoneTasks = () => {
-    const tasksDone = DATA.filter((task: Task) => task.isDone === true);
+    const tasksDone = listTask.filter((task: Task) => task.isDone === true);
     return tasksDone.length;
   };
 
@@ -73,8 +71,8 @@ export const Home: React.FC = () => {
 
           <ListObj
             data={listTask}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={({item}) => <Tasks taskDescription={item.task} />}
+            keyExtractor={(item) => item.id}
+            renderItem={({item}) => <Tasks taskDescription={item.description} />}
             ListEmptyComponent={<Empty source={AppEmpty} />}
           />
         </Content>
