@@ -10,10 +10,20 @@ import AppEmpty from '~/assets/images/Empty.png';
 import {Task} from '~/interfaces/task';
 import {DATA} from '~/services/data.mock';
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
+//IMPORTES NOVOS
+
+import {ObjTask} from '~/components/Task';
 
 export const Home: React.FC = () => {
+  const listTask: ObjTask[] = [
+    {
+      id: 0,
+      taskDescription: 'Task Com Index 0 e False Sem Dates',
+      isDone: false,
+    },
+  ];
+
   const [task, setTask] = useState('');
-  const [list, setList] = useState([]);
   const {t: translate} = useTranslation();
   const [error, showError] = useState(false);
 
@@ -22,7 +32,7 @@ export const Home: React.FC = () => {
   //Funções
 
   const handleAddTask = () => {
-    setList([...list, task]);
+    //setList([...list, task]);
     setTask('');
   };
 
@@ -62,9 +72,9 @@ export const Home: React.FC = () => {
           </Counters>
 
           <ListObj
-            data={DATA}
+            data={listTask}
             keyExtractor={(item) => String(item.id)}
-            renderItem={({item}) => <Tasks descriptionTask={item.task} />}
+            renderItem={({item}) => <Tasks taskDescription={item.task} />}
             ListEmptyComponent={<Empty source={AppEmpty} />}
           />
         </Content>

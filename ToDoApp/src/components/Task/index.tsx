@@ -1,16 +1,23 @@
 import React, {useState} from 'react';
 import {ViewTask, Task, Button} from './styles';
 
-interface TaskProp {
-  descriptionTask: string;
-  isDone?: boolean;
+export interface ObjTask {
+  id: number;
+  taskDescription: string;
+  isDone: boolean;
+  //date: () => {};
+  //timestamp: (value: number) => void;
 }
 
-export const Tasks = ({descriptionTask, isDone}: TaskProp) => {
+interface TaskProp {
+  task: ObjTask[];
+}
+
+export const Tasks = ({taskDescription}: ObjTask) => {
   return (
     <Button>
       <ViewTask>
-        <Task>{descriptionTask}</Task>
+        <Task>{taskDescription}</Task>
       </ViewTask>
     </Button>
   );
