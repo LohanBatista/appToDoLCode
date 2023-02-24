@@ -10,35 +10,34 @@ import AppEmpty from '~/assets/images/Empty.png';
 import {Task} from '~/interfaces/task';
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
 
-export const Home: React.FC = () => {
-  const listTask: Task[] = [
-    {
-      id: '0',
-      description: 'Task Com Index 0 e False Sem Dates',
-      isDone: false,
-      date: new Date(),
-      timestamp: new Date().getDate(),
-    },
-  ];
+import {Utils} from '~/utils';
 
+export const Home: React.FC = () => {
+  const [list, setList] = useState<Task[]>([]);
   const [task, setTask] = useState('');
   const {t: translate} = useTranslation();
   const [error, showError] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
 
-  //Funções
+  //Function
 
   const handleAddTask = () => {
-    //setList([...list, task]);
-    setTask('');
+    const obj: Task = {
+      id: Utils.getNewId(),
+      description: task,
+      isDone: false,
+      date: Utils.getNewDate(),
+      timestamp: Utils.getTimestamp(),
+    };
+    setList([...list, obj]);
   };
 
   const amountedCreatedTasks = () => {
-    return listTask.length;
+    return list.length;
   };
   const amountedDoneTasks = () => {
-    const tasksDone = listTask.filter((task: Task) => task.isDone === true);
+    const tasksDone = list.filter((task: Task) => task.isDone === true);
     return tasksDone.length;
   };
 
@@ -70,7 +69,7 @@ export const Home: React.FC = () => {
           </Counters>
 
           <ListObj
-            data={listTask}
+            data={list}
             keyExtractor={(item) => item.id}
             renderItem={({item}) => <Tasks taskDescription={item.description} />}
             ListEmptyComponent={<Empty source={AppEmpty} />}

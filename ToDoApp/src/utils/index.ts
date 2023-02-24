@@ -2,7 +2,7 @@ import uui from 'react-native-uuid';
 
 function getNewId() {
   const id = uui.v4();
-  return id;
+  return String(id);
 }
 
 function getNewDate() {
