@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {ViewTask, TaskText, Button, ViewModal} from './styles';
+import {ViewTask, TaskText, Button, ViewModal, Header, Logo, View} from './styles';
 import {Modal} from 'react-native';
 import {Task} from '~/interfaces/task';
+import AppLogo from '~/assets/images/Logo.png';
 
 interface TaskComponentProps {
   task: Task;
@@ -28,18 +29,23 @@ export const Tasks = ({task, action}: TaskComponentProps) => {
         onRequestClose={() => {
           setVisible(false);
         }}>
-        <ViewModal>
-          <Button>
-            <ViewTask>
-              <TaskText>Marcar Como Feita?</TaskText>
-            </ViewTask>
-          </Button>
-          <Button onPress={action}>
-            <ViewTask>
-              <TaskText>Excluir a tarefa ?</TaskText>
-            </ViewTask>
-          </Button>
-        </ViewModal>
+        <View>
+          <Header>
+            <Logo source={AppLogo} />
+          </Header>
+          <ViewModal>
+            <Button>
+              <ViewTask>
+                <TaskText>Marcar Como Feita?</TaskText>
+              </ViewTask>
+            </Button>
+            <Button onPress={action}>
+              <ViewTask>
+                <TaskText>Excluir a tarefa ?</TaskText>
+              </ViewTask>
+            </Button>
+          </ViewModal>
+        </View>
       </Modal>
     </>
   );
