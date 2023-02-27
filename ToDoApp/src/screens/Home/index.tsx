@@ -11,6 +11,7 @@ import {Task} from '~/interfaces/task';
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
 
 import {Utils} from '~/utils';
+import {Modal} from 'react-native';
 
 export const Home: React.FC = () => {
   const [list, setList] = useState<Task[]>([]);

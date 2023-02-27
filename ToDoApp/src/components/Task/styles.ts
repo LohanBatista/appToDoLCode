@@ -24,3 +24,8 @@ export const Task = styled.Text`
 
   color: ${({theme}) => theme.colors.gray_100};
 `;
+export const ViewModal = styled.View`
+  background-color: ${({theme}) => theme.colors.gray_600};
+  width: 100%;
+  height: 100%;
+`;
