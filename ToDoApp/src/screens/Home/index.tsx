@@ -25,8 +25,8 @@ export const Home: React.FC = () => {
 
   //Function
 
-  const handleDelete = () => {
-    setList(list.filter((list) => list.id != list.id));
+  const handleDelete = (id: string) => {
+    setList(list.filter((remove) => remove.id != id));
   };
 
   const handleAddTask = () => {
