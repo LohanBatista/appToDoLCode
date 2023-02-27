@@ -78,7 +78,9 @@ export const Home: React.FC = () => {
           <ListObj
             data={list}
             keyExtractor={(item) => item.id}
-            renderItem={({item}) => <Tasks action={handleDelete} task={item} />}
+            renderItem={({item}) => (
+              <Tasks action={() => handleDelete(item.id)} task={item} />
+            )}
             ListEmptyComponent={<Empty source={AppEmpty} />}
           />
         </Content>
