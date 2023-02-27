@@ -1,32 +1,24 @@
 import React, {useState} from 'react';
-import {ViewTask, Task, Button, ViewModal} from './styles';
+import {ViewTask, TaskText, Button, ViewModal} from './styles';
 import {Modal} from 'react-native';
+import {Task} from '~/interfaces/task';
 
 interface TaskComponentProps {
-  taskDescription: string;
+  task: Task;
+  action: () => void;
 }
 
-export const Tasks = ({taskDescription}: TaskComponentProps) => {
+export const Tasks = ({task, action}: TaskComponentProps) => {
   const [visible, setVisible] = useState(false);
-  const [remove, setRemove] = useState();
 
   const handleClick = () => {
     setVisible(true);
   };
-  const handleIsDone = () => {
-    // pegar a prop do obj isDone e setar para True
-    if (isDone === false) {
-      setIsDone(true);
-    } else {
-      alert('Está tarefa já está concluida');
-    }
-  };
-  const handleDelete = () => {};
   return (
     <>
       <Button onPress={handleClick}>
         <ViewTask>
-          <Task>{taskDescription}</Task>
+          <TaskText>{task.description}</TaskText>
         </ViewTask>
       </Button>
       <Modal
@@ -39,12 +31,12 @@ export const Tasks = ({taskDescription}: TaskComponentProps) => {
         <ViewModal>
           <Button>
             <ViewTask>
-              <Task>Marcar Como Feita?</Task>
+              <TaskText>Marcar Como Feita?</TaskText>
             </ViewTask>
           </Button>
-          <Button>
+          <Button onPress={action}>
             <ViewTask>
-              <Task>Excluir a tarefa ?</Task>
+              <TaskText>Excluir a tarefa ?</TaskText>
             </ViewTask>
           </Button>
         </ViewModal>

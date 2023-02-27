@@ -21,7 +21,13 @@ export const Home: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [remove, setRemove] = useState();
+
   //Function
+
+  const handleDelete = () => {
+    setList(list.filter((list) => list.id != list.id));
+  };
 
   const handleAddTask = () => {
     const obj: Task = {
@@ -72,7 +78,7 @@ export const Home: React.FC = () => {
           <ListObj
             data={list}
             keyExtractor={(item) => item.id}
-            renderItem={({item}) => <Tasks taskDescription={item.description} />}
+            renderItem={({item}) => <Tasks action={handleDelete} task={item} />}
             ListEmptyComponent={<Empty source={AppEmpty} />}
           />
         </Content>

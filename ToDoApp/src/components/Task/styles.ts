@@ -17,7 +17,7 @@ export const ViewTask = styled.View`
 
   background-color: ${({theme}) => theme.colors.gray_500};
 `;
-export const Task = styled.Text`
+export const TaskText = styled.Text`
   font-size: ${Responsive.fontInPixelToDP(14)}px;
   font-weight: ${Responsive.fontInPixelToDP(400)}px;
   font-family: ${({theme}) => theme.fonts.inter_regular};
