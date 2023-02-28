@@ -1,52 +1,34 @@
 import React, {useState} from 'react';
-import {ViewTask, TaskText, Button, ViewModal, Header, Logo, View} from './styles';
-import {Modal} from 'react-native';
+import {ViewTask, TaskText, Button} from './styles';
 import {Task} from '~/interfaces/task';
 import AppLogo from '~/assets/images/Logo.png';
+import {ModalTask} from '../ModalTask';
 
 interface TaskComponentProps {
   task: Task;
-  action: () => void;
+  onDelete: () => void;
 }
 
-export const Tasks = ({task, action}: TaskComponentProps) => {
+export const Tasks = ({task, onDelete}: TaskComponentProps) => {
   const [visible, setVisible] = useState(false);
 
-  const handleClick = () => {
-    setVisible(true);
-  };
+  function toggleVisibleModal() {
+    setVisible((actualVisible) => !actualVisible);
+  }
+
+  function onCloseModal() {
+    setVisible(false);
+  }
+
   return (
     <>
-      <Button onPress={handleClick}>
+      <Button onPress={toggleVisibleModal}>
         <ViewTask>
           <TaskText>{task.description}</TaskText>
         </ViewTask>
       </Button>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={visible}
-        onRequestClose={() => {
-          setVisible(false);
-        }}>
-        <View>
-          <Header>
-            <Logo source={AppLogo} />
-          </Header>
-          <ViewModal>
-            <Button>
-              <ViewTask>
-                <TaskText>Marcar Como Feita?</TaskText>
-              </ViewTask>
-            </Button>
-            <Button onPress={action}>
-              <ViewTask>
-                <TaskText>Excluir a tarefa ?</TaskText>
-              </ViewTask>
-            </Button>
-          </ViewModal>
-        </View>
-      </Modal>
+
+      <ModalTask visible={visible} task={task} close={onCloseModal} onDelete={onDelete} />
     </>
   );
 };

@@ -1,33 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {PageViewComponent} from '~/components/PageView';
-import {InputHome} from '~/components/InputHome';
+
 import {Tasks} from '~/components/Task';
 import {NewTasks} from '~/components/NewTasks';
 import {DoneTasks} from '~/components/DoneTasks';
+import {InputHome} from '~/components/InputHome';
+import {PageViewComponent} from '~/components/PageView';
+
 import AppLogo from '~/assets/images/Logo.png';
 import AppEmpty from '~/assets/images/Empty.png';
-import {Task} from '~/interfaces/task';
-import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
 
 import {Utils} from '~/utils';
-import {Modal} from 'react-native';
+import {Task} from '~/interfaces/task';
+
+import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
 
 export const Home: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState<Task[]>([]);
   const [task, setTask] = useState('');
   const {t: translate} = useTranslation();
-  const [error, showError] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [remove, setRemove] = useState();
-
-  //Function
-
-  const handleDelete = (id: string) => {
-    setList(list.filter((remove) => remove.id != id));
-  };
 
   const handleAddTask = () => {
     const obj: Task = {
@@ -40,13 +32,22 @@ export const Home: React.FC = () => {
     setList([...list, obj]);
   };
 
+  const handleDelete = (id: string) => {
+    setList(list.filter((remove) => remove.id != id));
+  };
+
   const amountedCreatedTasks = () => {
     return list.length;
   };
+
   const amountedDoneTasks = () => {
     const tasksDone = list.filter((task: Task) => task.isDone === true);
     return tasksDone.length;
   };
+
+  const renderItem = ({item}: {item: Task}) => (
+    <Tasks onDelete={() => handleDelete(item.id)} task={item} />
+  );
 
   useEffect(() => {
     if (isLoading === true)
@@ -71,16 +72,14 @@ export const Home: React.FC = () => {
           />
 
           <Counters>
-            <NewTasks count={amountedCreatedTasks()} />
-            <DoneTasks count={amountedDoneTasks()} />
+            <NewTasks count={amountedCreatedTasks} />
+            <DoneTasks count={amountedDoneTasks} />
           </Counters>
 
           <ListObj
             data={list}
             keyExtractor={(item) => item.id}
-            renderItem={({item}) => (
-              <Tasks action={() => handleDelete(item.id)} task={item} />
-            )}
+            renderItem={renderItem}
             ListEmptyComponent={<Empty source={AppEmpty} />}
           />
         </Content>

@@ -9,6 +9,7 @@ export default {
     gray_200: '#D9D9D9',
     gray_100: '#F2F2F2',
 
+    success: '#58E26A',
     danger: '#E25858',
 
     //Cores do Produto
@@ -17,6 +18,8 @@ export default {
 
     blue: '#4EA8DE',
     blueDark: '#1E6F9F',
+
+    transparent: 'rgba(0, 0, 0, 0.7)',
   },
   fonts: {
     inter_regular: 'Inter_400Regular',

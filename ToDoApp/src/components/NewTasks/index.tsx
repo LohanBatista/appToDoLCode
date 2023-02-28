@@ -3,17 +3,18 @@ import {useTranslation} from 'react-i18next';
 import {ViewCount, NewTask, ViewFlex, NumberCount} from './styles';
 
 interface Props {
-  count: number;
+  count: () => number;
 }
 
-export const NewTasks: React.FC<Props> = ({count = 0}) => {
+export const NewTasks: React.FC<Props> = ({count}) => {
   const {t: translate} = useTranslation();
+  const labelCount = count() ?? 0;
 
   return (
     <ViewFlex>
       <NewTask>{translate('components.newTasks.title')}</NewTask>
       <ViewCount>
-        <NumberCount>{count}</NumberCount>
+        <NumberCount>{labelCount}</NumberCount>
       </ViewCount>
     </ViewFlex>
   );

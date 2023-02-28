@@ -6,6 +6,16 @@
       },
       "doneTasks": {
         "title": "Concluída"
+      },
+      "modalTask": {
+        "title": "Tarefa",
+        "statusDone": "Concluída",
+        "statusPending": "Pendente",
+        "description": "Descrição",
+        "status": "Status",
+        "exclude": "Excluir",
+        "back": "Voltar",
+        "statusChange": "Alterar status"
       }
     },
     "screens": {
