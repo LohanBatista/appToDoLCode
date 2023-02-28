@@ -14,6 +14,7 @@ import {Utils} from '~/utils';
 import {Task} from '~/interfaces/task';
 
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
+import {ButtonComponent} from '~/components/ButtonComponent';
 
 export const Home: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,15 +57,20 @@ export const Home: React.FC = () => {
       }, 5000);
   }, []);
 
+  const [isCarregando, setIsCarregando] = useState(false);
+
+  const toggleLoading = () => {
+    setIsCarregando((prev) => !prev);
+  };
   return (
     <PageViewComponent isLoading={isLoading}>
-      <ViewColum>
+      {/* <ViewColum>
         <Header>
           <Logo source={AppLogo} />
         </Header>
 
-        <Content>
-          <InputHome
+        <Content> */}
+      {/* <InputHome
             value={task}
             onChangeText={setTask}
             action={handleAddTask}
@@ -77,9 +83,10 @@ export const Home: React.FC = () => {
           </Counters>
 
           <ListObj data={list} keyExtractor={(item) => item.id} renderItem={renderItem} />
-          {list.length === 0 && <Empty source={AppEmpty} />}
-        </Content>
-      </ViewColum>
+          {list.length === 0 && <Empty source={AppEmpty} />} */}
+      <ButtonComponent text="Adicionar" onClick={toggleLoading} loading={isCarregando} />
+      {/* </Content>
+      </ViewColum> */}
     </PageViewComponent>
   );
 };
