@@ -13,7 +13,16 @@ import AppEmpty from '~/assets/images/Empty.png';
 import {Utils} from '~/utils';
 import {Task} from '~/interfaces/task';
 
-import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
+import {
+  Content,
+  Empty,
+  Header,
+  Logo,
+  ViewColum,
+  Counters,
+  ListObj,
+  Button,
+} from './styles';
 import {ButtonComponent} from '~/components/ButtonComponent';
 
 export const Home: React.FC = () => {
@@ -85,6 +94,13 @@ export const Home: React.FC = () => {
           <ListObj data={list} keyExtractor={(item) => item.id} renderItem={renderItem} />
           {list.length === 0 && <Empty source={AppEmpty} />} */}
       <ButtonComponent text="Adicionar" onClick={toggleLoading} loading={isCarregando} />
+      <Button
+        text="Adicionar"
+        onClick={toggleLoading}
+        loading={isCarregando}
+        background={'red'}
+        width={100}
+      />
       {/* </Content>
       </ViewColum> */}
     </PageViewComponent>

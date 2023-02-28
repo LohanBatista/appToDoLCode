@@ -6,6 +6,8 @@ interface ButtonProps {
   onClick: () => void;
   disable?: boolean;
   loading?: boolean;
+  background?: string;
+  width?: number;
 }
 
 export const ButtonComponent: React.FC<ButtonProps> = ({
@@ -13,9 +15,11 @@ export const ButtonComponent: React.FC<ButtonProps> = ({
   onClick,
   disable,
   loading,
+  background,
+  width,
 }) => {
   return (
-    <Button onPress={onClick} disabled={disable}>
+    <Button onPress={onClick} disabled={disable} background={background} width={width}>
       {loading ? <Loader /> : <Text>{text}</Text>}
     </Button>
   );
