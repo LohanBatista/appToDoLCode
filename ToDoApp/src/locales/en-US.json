@@ -1,7 +1,30 @@
 {
   "translation": {
-    "home": {
-      "title": "Hello"
+    "components": {
+      "newTasks": {
+        "title": "Created"
+      },
+      "doneTasks": {
+        "title": "Done"
+      },
+      "modalTask": {
+        "title": "Task",
+        "statusDone": "Done",
+        "statusPending": "Pending",
+        "description": "Description",
+        "status": "Status",
+        "exclude": "Delete",
+        "back": "Back",
+        "statusChange": "Change status"
+      }
+    },
+    "screens": {
+      "exemple": {
+        "title": "Hello world!"
+      },
+      "home": {
+        "placeholder": "Add a new task"
+      }
     }
   }
 }

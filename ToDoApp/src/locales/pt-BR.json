@@ -1,7 +1,30 @@
 {
   "translation": {
-    "home": {
-      "title": "Olá"
+    "components": {
+      "newTasks": {
+        "title": "Criadas"
+      },
+      "doneTasks": {
+        "title": "Concluída"
+      },
+      "modalTask": {
+        "title": "Tarefa",
+        "statusDone": "Concluída",
+        "statusPending": "Pendente",
+        "description": "Descrição",
+        "status": "Status",
+        "exclude": "Excluir",
+        "back": "Voltar",
+        "statusChange": "Alterar status"
+      }
+    },
+    "screens": {
+      "exemple": {
+        "title": "Olá mundo!"
+      },
+      "home": {
+        "placeholder": "Adicione uma nova tarefa"
+      }
     }
   }
 }
