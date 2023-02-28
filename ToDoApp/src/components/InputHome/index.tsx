@@ -31,6 +31,7 @@ export const InputHome = ({action, ...rest}: InputHomeProps) => {
   return (
     <ViewInput>
       <Input
+        maxLength={30}
         autoCorrect={false}
         isActive={isActive}
         onFocus={inputOnFocused}
