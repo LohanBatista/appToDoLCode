@@ -76,12 +76,8 @@ export const Home: React.FC = () => {
             <DoneTasks count={amountedDoneTasks} />
           </Counters>
 
-          <ListObj
-            data={list}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-            ListEmptyComponent={<Empty source={AppEmpty} />}
-          />
+          <ListObj data={list} keyExtractor={(item) => item.id} renderItem={renderItem} />
+          {list.length === 0 && <Empty source={AppEmpty} />}
         </Content>
       </ViewColum>
     </PageViewComponent>
