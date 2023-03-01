@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Loader, Text} from './styles';
 
 interface ButtonProps {

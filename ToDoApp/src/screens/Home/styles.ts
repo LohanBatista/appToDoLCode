@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 import {FlatList, FlatListProps} from 'react-native';
 import {Task} from '~/interfaces/task';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
-import {ButtonComponent} from '~/components/ButtonComponent';
 
 export const ViewColum = styled.SafeAreaView`
   flex: 1;
@@ -45,5 +44,3 @@ export const Empty = styled.Image`
 export const ListObj = styled(
   FlatList as new (props: FlatListProps<Task>) => FlatList<Task>,
 )``;
-
-export const Button = styled(ButtonComponent)``;

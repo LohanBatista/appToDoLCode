@@ -20,9 +20,9 @@ export const Text = styled.Text`
   font-family: ${({theme}) => theme.fonts.inter_bold};
 `;
 
-export const Loader = styled.ActivityIndicator.attrs({
-  color: '#ffff',
+export const Loader = styled.ActivityIndicator.attrs(({theme}) => ({
+  color: theme.colors.gray_100,
   size: 'large',
-})`
+}))`
   margin-top: ${Responsive.heightInPixelToDP(11)}px;
 `;
