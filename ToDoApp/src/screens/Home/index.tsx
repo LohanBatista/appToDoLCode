@@ -14,7 +14,6 @@ import {Utils} from '~/utils';
 import {Task} from '~/interfaces/task';
 
 import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
-import {Input} from '~/components/InputComponent';
 
 export const Home: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,7 +58,7 @@ export const Home: React.FC = () => {
 
   return (
     <PageViewComponent isLoading={isLoading}>
-      {/* <ViewColum>
+      <ViewColum>
         <Header>
           <Logo source={AppLogo} />
         </Header>
@@ -80,8 +79,7 @@ export const Home: React.FC = () => {
           <ListObj data={list} keyExtractor={(item) => item.id} renderItem={renderItem} />
           {list.length === 0 && <Empty source={AppEmpty} />}
         </Content>
-      </ViewColum> */}
-      <Input error={true} errorText={'Deu erro'} />
+      </ViewColum>
     </PageViewComponent>
   );
 };

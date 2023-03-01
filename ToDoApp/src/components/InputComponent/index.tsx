@@ -1,6 +1,7 @@
-import React from 'react';
-import {InputText, Text, View} from './styles';
-
+import React, {useState} from 'react';
+import {InputText, Text, View, Button, ErrorView} from './styles';
+import {Feather} from '@expo/vector-icons';
+import {useTheme} from 'styled-components/native';
 interface InputProps {
   error?: boolean;
   errorText?: string;
@@ -18,17 +19,45 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChangeText,
 }) => {
+  const [isOnBlur, setIsOnBlur] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(true);
+  const theme = useTheme();
+
+  const inputOnFocus = () => {
+    setIsOnBlur(true);
+  };
+  const inputNotFocus = () => {
+    setIsOnBlur(false);
+  };
+  const passwordVisible = () => {
+    setIsPasswordVisible((previewState) => !previewState);
+  };
   return (
     <>
-      <View error={error}>
-        <InputText
-          secureTextEntry={secureText}
-          placeholder={placeholderText}
-          value={value}
-          onChangeText={onChangeText}
-        />
-      </View>
-      {error ? <Text>{errorText}</Text> : null}
+      <ErrorView>
+        <View error={error} isActive={isOnBlur}>
+          <InputText
+            autoCorrect={false}
+            onFocus={inputOnFocus}
+            onBlur={inputNotFocus}
+            secureTextEntry={secureText && isPasswordVisible}
+            placeholder={placeholderText}
+            value={value}
+            onChangeText={onChangeText}
+          />
+
+          {secureText && (
+            <Button onPress={passwordVisible}>
+              <Feather
+                name={isPasswordVisible ? 'eye-off' : 'eye'}
+                size={24}
+                color={theme.colors.gray_300}
+              />
+            </Button>
+          )}
+        </View>
+        {error && <Text>{errorText}</Text>}
+      </ErrorView>
     </>
   );
 };
