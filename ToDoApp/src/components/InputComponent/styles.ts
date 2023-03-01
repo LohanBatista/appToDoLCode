@@ -1,11 +1,15 @@
 import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
+import theme from '~/config/theme';
 
 interface ViewProps {
   error?: boolean;
 }
 
-export const InputText = styled.TextInput`
+export const InputText = styled.TextInput.attrs(({theme}) => ({
+  placeholderTextColor: theme.colors.gray_300,
+}))`
+  color: ${({theme}) => theme.colors.gray_100};
   font-size: ${Responsive.fontInPixelToDP(18)}px;
 `;
 
