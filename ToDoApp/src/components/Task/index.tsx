@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ViewTask, TaskText, Button} from './styles';
 import {Task} from '~/interfaces/task';
 import AppLogo from '~/assets/images/Logo.png';
-import {ModalTask} from '../ModalTask';
+import {Modal} from '../Modal';
 
 interface TaskComponentProps {
   task: Task;
@@ -28,7 +28,7 @@ export const Tasks = ({task, onDelete}: TaskComponentProps) => {
         </ViewTask>
       </Button>
 
-      <ModalTask visible={visible} task={task} close={onCloseModal} onDelete={onDelete} />
+      <Modal Visible={visible} />
     </>
   );
 };
