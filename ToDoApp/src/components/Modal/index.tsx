@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {
   CloseIcon,
   LogoIcon,
@@ -16,25 +17,33 @@ import {useTheme} from 'styled-components/native';
 
 import {Task} from '~/interfaces/task';
 interface ModalProps {
-  Visible: boolean;
+  visible: boolean;
   task: Task;
   actionVisible: () => void;
-  ActionDelete: () => void;
+  actionDelete: () => void;
+  actionFinalization: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({
-  Visible,
+  visible,
   task,
   actionVisible,
-  ActionDelete,
+  actionDelete,
+  actionFinalization,
 }) => {
+  const {t: translate} = useTranslation();
   const theme = useTheme();
+
+  const actionButton = () => {
+    actionFinalization();
+    actionVisible();
+  };
 
   return (
     <ModalStyled
       animationType="slide"
       transparent={true}
-      visible={Visible}
+      visible={visible}
       onRequestClose={actionVisible}>
       <ViewBackground>
         <ViewModal>
@@ -49,11 +58,15 @@ export const Modal: React.FC<ModalProps> = ({
           <ViewButton>
             <ButtonComponent
               width={150}
-              onClick={ActionDelete}
+              onClick={actionDelete}
               background={theme.colors.danger}
-              text={'Excluir'}
+              text={translate('components.modal.exclude')}
             />
-            <ButtonComponent width={150} onClick={() => {}} text={'Finalizar'} />
+            <ButtonComponent
+              width={150}
+              onClick={actionButton}
+              text={translate('components.modal.finalize')}
+            />
           </ViewButton>
         </ViewModal>
       </ViewBackground>

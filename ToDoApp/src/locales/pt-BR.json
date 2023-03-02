@@ -7,15 +7,9 @@
       "doneTasks": {
         "title": "Concluída"
       },
-      "modalTask": {
-        "title": "Tarefa",
-        "statusDone": "Concluída",
-        "statusPending": "Pendente",
-        "description": "Descrição",
-        "status": "Status",
+      "modal": {
         "exclude": "Excluir",
-        "back": "Voltar",
-        "statusChange": "Alterar status"
+        "finalize": "Finalizar"
       }
     },
     "screens": {
