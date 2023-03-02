@@ -29,11 +29,11 @@ export const Home: React.FC = () => {
       date: Utils.getNewDate(),
       timestamp: Utils.getTimestamp(),
     };
-    setList([...list, obj]);
+    setList((CurrentList) => [...CurrentList, obj]);
   };
 
   const handleDelete = (id: string) => {
-    setList(list.filter((remove) => remove.id != id));
+    setList((CurrentList) => CurrentList.filter((item) => item.id != id));
   };
 
   const amountedCreatedTasks = () => {

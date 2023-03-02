@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {ViewTask, TaskText, Button} from './styles';
 import {Task} from '~/interfaces/task';
-import AppLogo from '~/assets/images/Logo.png';
 import {Modal} from '../Modal';
 
 interface TaskComponentProps {
@@ -16,10 +15,6 @@ export const Tasks = ({task, onDelete}: TaskComponentProps) => {
     setVisible((actualVisible) => !actualVisible);
   }
 
-  function onCloseModal() {
-    setVisible(false);
-  }
-
   return (
     <>
       <Button onPress={toggleVisibleModal}>
@@ -28,7 +23,12 @@ export const Tasks = ({task, onDelete}: TaskComponentProps) => {
         </ViewTask>
       </Button>
 
-      <Modal Visible={visible} />
+      <Modal
+        task={task}
+        Visible={visible}
+        actionVisible={toggleVisibleModal}
+        ActionDelete={onDelete}
+      />
     </>
   );
 };
