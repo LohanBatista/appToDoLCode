@@ -46,3 +46,5 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   background-color: ${({theme, isActive}) =>
     isActive ? theme.colors.blue : theme.colors.blueDark};
 `;
+
+export const Loader = styled.ActivityIndicator``;

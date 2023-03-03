@@ -1,7 +1,11 @@
 import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
-export const NewTask = styled.Text`
+interface OptionTaskProps {
+  color?: string;
+}
+
+export const Task = styled.Text<OptionTaskProps>`
   width: ${Responsive.widthInPixelToDP(54)}px;
   height: ${Responsive.heightInPixelToDP(17)}px;
 
@@ -9,7 +13,7 @@ export const NewTask = styled.Text`
   font-size: ${Responsive.fontInPixelToDP(14)}px;
   line-height: ${Responsive.fontInPixelToDP(17)}px;
 
-  color: ${({theme}) => theme.colors.blue};
+  color: ${({color, theme}) => color || theme.colors.blue};
 `;
 
 export const ViewCount = styled.View`
@@ -35,3 +39,5 @@ export const NumberCount = styled.Text`
   font-family: ${({theme}) => theme.fonts.inter_bold};
   color: ${({theme}) => theme.colors.gray_200};
 `;
+
+export const Button = styled.TouchableOpacity``;

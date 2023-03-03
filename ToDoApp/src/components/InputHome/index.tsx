@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
 import {useTheme} from 'styled-components/native';
-import {Input, Button, ViewInput} from './styles';
+import {Input, Button, ViewInput, Loader} from './styles';
 import IconButton from '~/assets/icons/plus.svg';
 
 interface InputHomeProps extends TextInputProps {
   action: Function;
+  buttonEnable: boolean;
+  loading: boolean;
 }
 
-export const InputHome = ({action, ...rest}: InputHomeProps) => {
+export const InputHome = ({action, buttonEnable, loading, ...rest}: InputHomeProps) => {
   const [isActive, setActive] = useState(false);
   const [onPressed, setPressed] = useState(false);
+
   const theme = useTheme();
 
   function inputOnFocused() {
@@ -41,10 +44,11 @@ export const InputHome = ({action, ...rest}: InputHomeProps) => {
         {...rest}
       />
       <Button
+        disabled={buttonEnable}
         isActive={onPressed}
         onPressIn={buttonPressed}
         onPressOut={() => [buttonIsNotPressed(), action()]}>
-        <IconButton />
+        {loading ? <Loader /> : <IconButton />}
       </Button>
     </ViewInput>
   );
