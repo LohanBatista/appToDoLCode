@@ -23,6 +23,8 @@ export const Input: React.FC<InputProps> = ({
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const theme = useTheme();
 
+  const iconName = isPasswordVisible ? 'eye-off' : 'eye';
+
   const inputOnFocus = () => {
     setIsOnBlur(true);
   };
@@ -32,6 +34,7 @@ export const Input: React.FC<InputProps> = ({
   const passwordVisible = () => {
     setIsPasswordVisible((previewState) => !previewState);
   };
+
   return (
     <>
       <ErrorView>
@@ -48,11 +51,7 @@ export const Input: React.FC<InputProps> = ({
 
           {secureText && (
             <Button onPress={passwordVisible}>
-              <Feather
-                name={isPasswordVisible ? 'eye-off' : 'eye'}
-                size={24}
-                color={theme.colors.gray_300}
-              />
+              <Feather name={iconName} size={24} color={theme.colors.gray_300} />
             </Button>
           )}
         </View>
