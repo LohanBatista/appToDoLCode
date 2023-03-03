@@ -7,15 +7,9 @@
       "doneTasks": {
         "title": "Done"
       },
-      "modalTask": {
-        "title": "Task",
-        "statusDone": "Done",
-        "statusPending": "Pending",
-        "description": "Description",
-        "status": "Status",
+      "modal": {
         "exclude": "Delete",
-        "back": "Back",
-        "statusChange": "Change status"
+        "finalize": "Finalize"
       }
     },
     "screens": {

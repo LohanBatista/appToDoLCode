@@ -40,11 +40,23 @@ export const Home: React.FC = () => {
       date: Utils.getNewDate(),
       timestamp: Utils.getTimestamp(),
     };
-    setList([...list, obj]);
+    setList((CurrentList) => [...CurrentList, obj]);
   };
 
   const handleDelete = (id: string) => {
-    setList(list.filter((remove) => remove.id != id));
+    setList((CurrentList) => CurrentList.filter((item) => item.id != id));
+  };
+
+  const handleFinalize = (task: Task) => {
+    const data: Task = {
+      id: task.id,
+      description: task.description,
+      isDone: !task.isDone,
+      date: task.date,
+      timestamp: task.timestamp,
+    };
+    const FilteredList = list.filter((item) => item.id !== task.id);
+    setList([...FilteredList, data]);
   };
 
   const amountedCreatedTasks = () => {
@@ -57,7 +69,11 @@ export const Home: React.FC = () => {
   };
 
   const renderItem = ({item}: {item: Task}) => (
-    <Tasks onDelete={() => handleDelete(item.id)} task={item} />
+    <Tasks
+      onFinalization={() => handleFinalize(item)}
+      onDelete={() => handleDelete(item.id)}
+      task={item}
+    />
   );
 
   const createdTask = () => {
