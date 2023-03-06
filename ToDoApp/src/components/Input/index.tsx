@@ -8,10 +8,11 @@ interface InputProps extends TextInputProps {
   error?: boolean;
   errorText?: string;
   secureText?: boolean;
+  placeholder: string;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
-  const {error, errorText, secureText, ...rest} = props;
+  const {error, errorText, secureText, placeholder, ...rest} = props;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isOnBlur, setIsOnBlur] = useState(false);
@@ -29,6 +30,7 @@ export const Input: React.FC<InputProps> = (props) => {
         <InputText
           autoCorrect={false}
           cursorColor={colors.gray_100}
+          placeholder={placeholder}
           placeholderTextColor={colors.gray_300}
           onFocus={inputOnFocus}
           onBlur={inputNotFocus}

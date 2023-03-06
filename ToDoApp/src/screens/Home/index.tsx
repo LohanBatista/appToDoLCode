@@ -23,6 +23,7 @@ import {
   Counters,
   ListObj,
   ViewInput,
+  ButtonHome,
 } from './styles';
 
 export const Home: React.FC = () => {
@@ -31,6 +32,7 @@ export const Home: React.FC = () => {
   const [list, setList] = useState<Task[]>([]);
   const [actualList, setActualList] = useState<'created' | 'done'>('created');
   const [filterList, setFilterList] = useState<Task[]>([]);
+  const [disableButton, setDisableButton] = useState(false);
   const {t: translate} = useTranslation();
   const {colors} = useTheme();
 
@@ -51,6 +53,18 @@ export const Home: React.FC = () => {
     setList((actualList) => actualList.filter((remove) => remove.id != id));
   };
 
+  const handleFinalize = (task: Task) => {
+    const data: Task = {
+      id: task.id,
+      description: task.description,
+      isDone: !task.isDone,
+      date: task.date,
+      timestamp: task.timestamp,
+    };
+    const FilteredList = list.filter((item) => item.id !== task.id);
+    setList([...FilteredList, data]);
+  };
+
   const amountedCreatedTasks = () => {
     return list.length;
   };
@@ -61,7 +75,11 @@ export const Home: React.FC = () => {
   };
 
   const renderItem = ({item}: {item: Task}) => (
-    <Tasks onFinalization={() => {}} onDelete={() => handleDelete(item.id)} task={item} />
+    <Tasks
+      onFinalization={() => handleFinalize(item)}
+      onDelete={() => handleDelete(item.id)}
+      task={item}
+    />
   );
 
   const EmptyList = () => <Empty source={AppEmpty} />;
@@ -95,6 +113,11 @@ export const Home: React.FC = () => {
     if (actualList === 'done') return doneTask(list);
   }, [list]);
 
+  useEffect(() => {
+    if (task.length > 4) return setDisableButton(false);
+    else return setDisableButton(true);
+  }, [task]);
+
   return (
     <PageViewComponent isLoading={isLoading}>
       <ViewColum>
@@ -104,18 +127,27 @@ export const Home: React.FC = () => {
 
         <Content>
           <ViewInput>
-            <Input value={task} onChangeText={setTask} />
-            <Button onClick={handleAddTask} hasIconPlus width={52} />
+            <Input
+              value={task}
+              onChangeText={setTask}
+              placeholder={translate('screens.home.placeholder')}
+            />
+            <ButtonHome
+              onClick={handleAddTask}
+              hasIconPlus
+              width={52}
+              disable={disableButton}
+            />
           </ViewInput>
 
           <Counters>
             <OptionTask
-              text="Criadas"
+              text={translate('components.optionTask.titleOne')}
               action={() => createdTask(list)}
               count={amountedCreatedTasks}
             />
             <OptionTask
-              text="Concluídas"
+              text={translate('components.optionTask.titleTwo')}
               action={() => doneTask(list)}
               color={colors.purpleDark}
               count={amountedDoneTasks}

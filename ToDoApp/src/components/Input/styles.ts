@@ -29,6 +29,7 @@ export const InputView = styled.View<ViewProps>`
         : theme.colors.gray_700};
   border-radius: 6px;
   justify-content: space-between;
+  width: ${Responsive.widthInPixelToDP(275)}px;
   height: ${Responsive.heightInPixelToDP(54)}px;
   background-color: ${({theme}) => theme.colors.gray_500};
 `;
