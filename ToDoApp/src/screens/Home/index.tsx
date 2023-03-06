@@ -36,27 +36,15 @@ export const Home: React.FC = () => {
     const obj: Task = {
       id: Utils.getNewId(),
       description: task,
-      isDone: false,
+      isDone: true,
       date: Utils.getNewDate(),
       timestamp: Utils.getTimestamp(),
     };
-    setList((CurrentList) => [...CurrentList, obj]);
+    setList([...list, obj]);
   };
 
   const handleDelete = (id: string) => {
-    setList((CurrentList) => CurrentList.filter((item) => item.id != id));
-  };
-
-  const handleFinalize = (task: Task) => {
-    const data: Task = {
-      id: task.id,
-      description: task.description,
-      isDone: !task.isDone,
-      date: task.date,
-      timestamp: task.timestamp,
-    };
-    const FilteredList = list.filter((item) => item.id !== task.id);
-    setList([...FilteredList, data]);
+    setList(list.filter((remove) => remove.id != id));
   };
 
   const amountedCreatedTasks = () => {
@@ -69,11 +57,7 @@ export const Home: React.FC = () => {
   };
 
   const renderItem = ({item}: {item: Task}) => (
-    <Tasks
-      onFinalization={() => handleFinalize(item)}
-      onDelete={() => handleDelete(item.id)}
-      task={item}
-    />
+    <Tasks onFinalization={() => {}} onDelete={() => handleDelete(item.id)} task={item} />
   );
 
   const createdTask = () => {
@@ -117,12 +101,14 @@ export const Home: React.FC = () => {
 
         <Content>
           <InputHome
+            //InputProps
             value={task}
-            onChangeText={setTask}
-            action={handleAddTask}
-            placeholder={translate('screens.home.placeholder') || ''}
-            buttonEnable={buttonEnable}
+            onChangeText={() => setTask}
+            placeholderText={translate('screens.home.placeholder') || ''}
+            //ButtonProps
+            disable={buttonEnable}
             loading={loadingButton}
+            action={handleAddTask}
           />
 
           <Counters>

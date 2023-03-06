@@ -1,28 +1,33 @@
 import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
 import {useTheme} from 'styled-components/native';
-import {Input, Button, ViewInput, Loader} from './styles';
-import IconButton from '~/assets/icons/plus.svg';
+import {ViewInput, Loader} from './styles';
 
+import {Input} from '../InputComponent';
+import {ButtonComponent} from '../ButtonComponent';
 interface InputHomeProps extends TextInputProps {
   action: Function;
-  buttonEnable: boolean;
+  disable: boolean;
   loading: boolean;
+  value: string;
+  placeholderText: string;
+  onChangeText: () => void;
 }
 
-export const InputHome = ({action, buttonEnable, loading, ...rest}: InputHomeProps) => {
+export const InputHome = ({
+  action,
+  disable,
+  loading,
+  value,
+  onChangeText,
+  placeholderText,
+  ...rest
+}: InputHomeProps) => {
   const [isActive, setActive] = useState(false);
   const [onPressed, setPressed] = useState(false);
 
   const theme = useTheme();
 
-  function inputOnFocused() {
-    setActive(true);
-  }
-
-  function inputIsNotFocused() {
-    setActive(false);
-  }
   function buttonPressed() {
     setPressed(true);
   }
@@ -34,22 +39,17 @@ export const InputHome = ({action, buttonEnable, loading, ...rest}: InputHomePro
   return (
     <ViewInput>
       <Input
-        maxLength={30}
-        autoCorrect={false}
-        isActive={isActive}
-        onFocus={inputOnFocused}
-        onBlur={inputIsNotFocused}
-        cursorColor={theme.colors.blue}
-        placeholderTextColor={theme.colors.gray_300}
-        {...rest}
+        value={value}
+        onChangeText={onChangeText}
+        placeholderText={placeholderText}
       />
-      <Button
-        disabled={buttonEnable}
-        isActive={onPressed}
-        onPressIn={buttonPressed}
-        onPressOut={() => [buttonIsNotPressed(), action()]}>
-        {loading ? <Loader /> : <IconButton />}
-      </Button>
+
+      <ButtonComponent
+        loadingOption={true}
+        width={52}
+        disable={disable}
+        onClick={() => action}
+      />
     </ViewInput>
   );
 };
