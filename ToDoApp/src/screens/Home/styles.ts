@@ -28,6 +28,11 @@ export const Content = styled.View`
   padding: 0 ${Responsive.widthInPixelToDP(25)}px;
 `;
 
+export const ViewInput = styled.View`
+  flex-direction: row;
+  margin-top: ${Responsive.heightInPixelToDP(142)}px;
+`;
+
 export const Counters = styled.View`
   flex-direction: row;
   justify-content: space-between;
