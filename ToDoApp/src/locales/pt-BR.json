@@ -16,6 +16,9 @@
       },
       "home": {
         "placeholder": "Adicione uma nova tarefa"
+      },
+      "login": {
+        "error": "Dados inválidos! Verifique as informações inseridas."
       }
     }
   }

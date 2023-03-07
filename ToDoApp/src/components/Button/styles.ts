@@ -18,7 +18,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 export const Text = styled.Text`
   color: ${({theme}) => theme.colors.gray_100};
-  font-size: ${Responsive.fontInPixelToDP(14)}px;
+  font-size: ${Responsive.fontInPixelToDP(17)}px;
   font-family: ${({theme}) => theme.fonts.inter_bold};
 `;
 

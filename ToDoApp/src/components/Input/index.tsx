@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
-import {InputText, Text, InputView, Button, Container} from './styles';
+import {InputText, Text, InputView, Button, Container, ViewText} from './styles';
 import {Feather} from '@expo/vector-icons';
 import {useTheme} from 'styled-components/native';
 
@@ -9,10 +9,11 @@ interface InputProps extends TextInputProps {
   errorText?: string;
   secureText?: boolean;
   placeholder: string;
+  width?: number;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
-  const {error, errorText, secureText, placeholder, ...rest} = props;
+  const {error, errorText, secureText, placeholder, width, ...rest} = props;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isOnBlur, setIsOnBlur] = useState(false);
@@ -26,7 +27,7 @@ export const Input: React.FC<InputProps> = (props) => {
 
   return (
     <Container>
-      <InputView error={error} isActive={isOnBlur}>
+      <InputView width={width} error={error} isActive={isOnBlur}>
         <InputText
           autoCorrect={false}
           cursorColor={colors.gray_100}
@@ -44,7 +45,11 @@ export const Input: React.FC<InputProps> = (props) => {
           </Button>
         )}
       </InputView>
-      {error && <Text>{errorText}</Text>}
+      {error && (
+        <ViewText>
+          <Text>{errorText}</Text>
+        </ViewText>
+      )}
     </Container>
   );
 };

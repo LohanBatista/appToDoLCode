@@ -4,6 +4,7 @@ import {Responsive} from '~/config/ResponsiveFontsTheme';
 interface ViewProps {
   error?: boolean;
   isActive: boolean;
+  width?: number;
 }
 
 export const Container = styled.View``;
@@ -29,7 +30,7 @@ export const InputView = styled.View<ViewProps>`
         : theme.colors.gray_700};
   border-radius: 6px;
   justify-content: space-between;
-  width: ${Responsive.widthInPixelToDP(275)}px;
+  width: ${({width}) => width || Responsive.widthInPixelToDP(275)}px;
   height: ${Responsive.heightInPixelToDP(54)}px;
   background-color: ${({theme}) => theme.colors.gray_500};
 `;
@@ -48,3 +49,4 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   margin-right: ${Responsive.widthInPixelToDP(20)}px;
 `;
+export const ViewText = styled.View``;

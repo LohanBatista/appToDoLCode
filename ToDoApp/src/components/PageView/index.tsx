@@ -1,4 +1,4 @@
-import {StatusBar, View} from 'react-native';
+import {StatusBar} from 'react-native';
 import React from 'react';
 import AppLogo from '~/assets/images/Logo.png';
 import {Container, Logo, LoaderView} from './styles';
