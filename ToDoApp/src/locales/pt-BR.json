@@ -1,11 +1,9 @@
 {
   "translation": {
     "components": {
-      "newTasks": {
-        "title": "Criadas"
-      },
-      "doneTasks": {
-        "title": "Concluída"
+      "optionTask": {
+        "titleOne": "Criadas",
+        "titleTwo": "Concluídas"
       },
       "modal": {
         "exclude": "Excluir",

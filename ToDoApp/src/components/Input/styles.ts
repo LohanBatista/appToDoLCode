@@ -6,10 +6,9 @@ interface ViewProps {
   isActive: boolean;
 }
 
-export const InputText = styled.TextInput.attrs(({theme}) => ({
-  placeholderTextColor: theme.colors.gray_300,
-  cursorColor: theme.colors.gray_100,
-}))`
+export const Container = styled.View``;
+
+export const InputText = styled.TextInput`
   color: ${({theme}) => theme.colors.gray_100};
   font-size: ${Responsive.fontInPixelToDP(16)}px;
   font-family: ${({theme}) => theme.fonts.inter_regular};
@@ -18,7 +17,7 @@ export const InputText = styled.TextInput.attrs(({theme}) => ({
   width: ${Responsive.widthInPixelToDP(270)}px;
 `;
 
-export const View = styled.View<ViewProps>`
+export const InputView = styled.View<ViewProps>`
   align-items: center;
   flex-direction: row;
   border: 1px solid
@@ -30,11 +29,10 @@ export const View = styled.View<ViewProps>`
         : theme.colors.gray_700};
   border-radius: 6px;
   justify-content: space-between;
+  width: ${Responsive.widthInPixelToDP(275)}px;
   height: ${Responsive.heightInPixelToDP(54)}px;
   background-color: ${({theme}) => theme.colors.gray_500};
 `;
-
-export const ErrorView = styled.View``;
 
 export const Text = styled.Text`
   margin-top: ${Responsive.heightInPixelToDP(8)}px;

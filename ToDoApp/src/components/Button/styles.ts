@@ -7,23 +7,24 @@ interface ButtonProps {
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
-  background-color: ${({theme, background}) => background || theme.colors.blueDark};
-  border-radius: 6px;
   align-items: center;
   justify-content: center;
-  width: ${({width}) => width || Responsive.RFPercentage(100)}px;
+
   height: ${Responsive.heightInPixelToDP(52)}px;
+  width: ${({width}) => width || Responsive.RFPercentage(100)}px;
+
+  border-radius: 6px;
+  background-color: ${({theme, background}) => background || theme.colors.blueDark};
 `;
 export const Text = styled.Text`
-  font-size: ${Responsive.fontInPixelToDP(14)}px;
-
   color: ${({theme}) => theme.colors.gray_100};
+  font-size: ${Responsive.fontInPixelToDP(14)}px;
   font-family: ${({theme}) => theme.fonts.inter_bold};
 `;
 
 export const Loader = styled.ActivityIndicator.attrs(({theme}) => ({
-  color: theme.colors.gray_100,
   size: 'large',
+  color: theme.colors.gray_100,
 }))`
   margin-top: ${Responsive.heightInPixelToDP(11)}px;
 `;

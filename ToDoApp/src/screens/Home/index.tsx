@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 
 import {Tasks} from '~/components/Task';
-import {NewTasks} from '~/components/NewTasks';
-import {DoneTasks} from '~/components/DoneTasks';
-import {InputHome} from '~/components/InputHome';
+import {Input} from '~/components/Input';
+import {Button} from '~/components/Button';
+import {OptionTask} from '~/components/OptionTask';
 import {PageViewComponent} from '~/components/PageView';
 
 import AppLogo from '~/assets/images/Logo.png';
@@ -13,13 +13,30 @@ import AppEmpty from '~/assets/images/Empty.png';
 import {Utils} from '~/utils';
 import {Task} from '~/interfaces/task';
 
-import {Content, Empty, Header, Logo, ViewColum, Counters, ListObj} from './styles';
+import {useTheme} from 'styled-components/native';
+import {
+  Content,
+  Empty,
+  Header,
+  Logo,
+  ViewColum,
+  Counters,
+  ListObj,
+  ViewInput,
+  ButtonHome,
+} from './styles';
 
 export const Home: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [list, setList] = useState<Task[]>([]);
   const [task, setTask] = useState('');
+  const [list, setList] = useState<Task[]>([]);
+  const [actualList, setActualList] = useState<'created' | 'done'>('created');
+  const [filterList, setFilterList] = useState<Task[]>([]);
+  const [disableButton, setDisableButton] = useState(false);
   const {t: translate} = useTranslation();
+  const {colors} = useTheme();
+
+  const isListEmpty = filterList.length === 0;
 
   const handleAddTask = () => {
     const obj: Task = {
@@ -29,11 +46,11 @@ export const Home: React.FC = () => {
       date: Utils.getNewDate(),
       timestamp: Utils.getTimestamp(),
     };
-    setList((CurrentList) => [...CurrentList, obj]);
+    setList((actualList) => [...actualList, obj]);
   };
 
   const handleDelete = (id: string) => {
-    setList((CurrentList) => CurrentList.filter((item) => item.id != id));
+    setList((actualList) => actualList.filter((remove) => remove.id != id));
   };
 
   const handleFinalize = (task: Task) => {
@@ -65,12 +82,41 @@ export const Home: React.FC = () => {
     />
   );
 
+  const EmptyList = () => <Empty source={AppEmpty} />;
+
+  const createdTask = (list: Task[]) => {
+    if (list.length > 0) {
+      const tasksCreated = list.filter((task: Task) => task.isDone === false);
+      setActualList('created');
+      setFilterList(tasksCreated);
+    } else {
+      setFilterList([]);
+    }
+  };
+
+  const doneTask = (list: Task[]) => {
+    if (list.length > 0) {
+      const tasksFinalized = list.filter((task: Task) => task.isDone === true);
+      setActualList('done');
+      setFilterList(tasksFinalized);
+    } else {
+      setFilterList([]);
+    }
+  };
+
   useEffect(() => {
-    if (isLoading === true)
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 5000);
+    if (isLoading) setTimeout(() => setIsLoading(false), 5000);
   }, []);
+
+  useEffect(() => {
+    if (actualList === 'created') return createdTask(list);
+    if (actualList === 'done') return doneTask(list);
+  }, [list]);
+
+  useEffect(() => {
+    if (task.length > 4) return setDisableButton(false);
+    else return setDisableButton(true);
+  }, [task]);
 
   return (
     <PageViewComponent isLoading={isLoading}>
@@ -80,20 +126,41 @@ export const Home: React.FC = () => {
         </Header>
 
         <Content>
-          <InputHome
-            value={task}
-            onChangeText={setTask}
-            action={handleAddTask}
-            placeholder={translate('screens.home.placeholder') || ''}
-          />
+          <ViewInput>
+            <Input
+              value={task}
+              onChangeText={setTask}
+              placeholder={translate('screens.home.placeholder')}
+            />
+            <ButtonHome
+              onClick={handleAddTask}
+              hasIconPlus
+              width={52}
+              disable={disableButton}
+            />
+          </ViewInput>
 
           <Counters>
-            <NewTasks count={amountedCreatedTasks} />
-            <DoneTasks count={amountedDoneTasks} />
+            <OptionTask
+              text={translate('components.optionTask.titleOne')}
+              action={() => createdTask(list)}
+              count={amountedCreatedTasks}
+            />
+            <OptionTask
+              text={translate('components.optionTask.titleTwo')}
+              action={() => doneTask(list)}
+              color={colors.purpleDark}
+              count={amountedDoneTasks}
+            />
           </Counters>
 
-          <ListObj data={list} keyExtractor={(item) => item.id} renderItem={renderItem} />
-          {list.length === 0 && <Empty source={AppEmpty} />}
+          <ListObj
+            data={filterList}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+
+          {isListEmpty && <EmptyList />}
         </Content>
       </ViewColum>
     </PageViewComponent>

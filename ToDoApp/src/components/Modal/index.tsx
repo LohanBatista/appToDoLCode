@@ -12,7 +12,7 @@ import {
   ViewBackground,
   ButtonClose,
 } from './styles';
-import {ButtonComponent} from '../ButtonComponent';
+import {Button} from '../Button';
 import {useTheme} from 'styled-components/native';
 
 import {Task} from '~/interfaces/task';
@@ -56,16 +56,16 @@ export const Modal: React.FC<ModalProps> = ({
           </ViewLogo>
           <TextDescription>{task.description}</TextDescription>
           <ViewButton>
-            <ButtonComponent
+            <Button
               width={150}
               onClick={actionDelete}
               background={theme.colors.danger}
-              text={translate('components.modal.exclude')}
+              text={translate('components.modal.exclude') || ''}
             />
-            <ButtonComponent
+            <Button
               width={150}
               onClick={actionButton}
-              text={translate('components.modal.finalize')}
+              text={translate('components.modal.finalize') || ''}
             />
           </ViewButton>
         </ViewModal>

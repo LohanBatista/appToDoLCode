@@ -1,37 +1,41 @@
 import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
-export const NewTask = styled.Text`
-  width: ${Responsive.widthInPixelToDP(54)}px;
-  height: ${Responsive.heightInPixelToDP(17)}px;
+interface OptionTaskProps {
+  color?: string;
+}
 
+export const Task = styled.Text<OptionTaskProps>`
   font-family: ${({theme}) => theme.fonts.inter_bold};
   font-size: ${Responsive.fontInPixelToDP(14)}px;
   line-height: ${Responsive.fontInPixelToDP(17)}px;
 
-  color: ${({theme}) => theme.colors.blue};
+  color: ${({color, theme}) => color || theme.colors.blue};
 `;
 
 export const ViewCount = styled.View`
+  justify-content: center;
   align-items: center;
+  margin-left: ${Responsive.widthInPixelToDP(8)}px;
 
-  width: ${Responsive.widthInPixelToDP(24)}px;
+  width: ${Responsive.widthInPixelToDP(25)}px;
   height: ${Responsive.widthInPixelToDP(19)}px;
 
-  margin-left: ${Responsive.RFValue(8)}px;
-  border-radius: ${Responsive.RFValue(999)}px;
+  border-radius: ${Responsive.RFValue(50)}px;
 
   background-color: ${({theme}) => theme.colors.gray_400};
 `;
 
 export const ViewFlex = styled.View`
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 `;
 
 export const NumberCount = styled.Text`
-  width: ${Responsive.widthInPixelToDP(8)}px;
-  height: ${Responsive.heightInPixelToDP(18)}px;
-
+  font-size: ${Responsive.fontInPixelToDP(12)}px;
   font-family: ${({theme}) => theme.fonts.inter_bold};
   color: ${({theme}) => theme.colors.gray_200};
 `;
+
+export const Button = styled.TouchableOpacity``;
