@@ -37,13 +37,14 @@ export const Login: React.FC = () => {
       }, 5000);
     }
   }, []);
-  useEffect(() => {
+
+  /* useEffect(() => {
     if (error === true) {
       setTimeout(() => {
         setError(false);
       }, 5000);
     }
-  });
+  }); */
   return (
     <PageViewComponent isLoading={isLoading}>
       <Container>
@@ -63,13 +64,17 @@ export const Login: React.FC = () => {
               value={password}
               onChangeText={setPassword}
               error={error}
-              errorText={'Dados inválidos! Verifique as informações inseridas.'}
+              errorText={'Dados inválidos! Verifique as informações \ninseridas.'}
               secureText={true}
               width={widthInput}
               placeholder="Digite sua senha"
             />
           </InputView>
-          <Button width={widthButton} text="Entrar" onClick={() => VerifyLogin()} />
+          <Button
+            width={widthButton}
+            text="Entrar"
+            onClick={() => setError((err) => !err)}
+          />
         </ViewLogin>
       </Container>
     </PageViewComponent>

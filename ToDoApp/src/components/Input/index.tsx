@@ -25,6 +25,18 @@ export const Input: React.FC<InputProps> = (props) => {
   const inputNotFocus = () => setIsOnBlur(false);
   const passwordVisible = () => setIsPasswordVisible((previewState) => !previewState);
 
+  const HasMessageError = () => {
+    if (error && !!errorText) {
+      return (
+        <ViewText>
+          <Text>{errorText}</Text>
+        </ViewText>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Container>
       <InputView width={width} error={error} isActive={isOnBlur}>
@@ -45,11 +57,8 @@ export const Input: React.FC<InputProps> = (props) => {
           </Button>
         )}
       </InputView>
-      {error && (
-        <ViewText>
-          <Text>{errorText}</Text>
-        </ViewText>
-      )}
+
+      <HasMessageError />
     </Container>
   );
 };
