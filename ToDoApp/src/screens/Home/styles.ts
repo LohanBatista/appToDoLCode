@@ -52,3 +52,12 @@ export const Empty = styled.Image`
 export const ListObj = styled(
   FlatList as new (props: FlatListProps<Task>) => FlatList<Task>,
 )``;
+
+export const ButtonLogout = styled.TouchableOpacity`
+  width: ${Responsive.widthInPixelToDP(25)}px;
+  height: ${Responsive.heightInPixelToDP(25)}px;
+  border-radius: 30px;
+  background-color: ${({theme}) => theme.colors.purpleDark};
+  margin-top: ${Responsive.heightInPixelToDP(60)}px;
+  margin-left: ${Responsive.widthInPixelToDP(330)}px;
+`;
