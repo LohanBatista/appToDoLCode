@@ -26,7 +26,7 @@ export const Input: React.FC<InputProps> = (props) => {
   const passwordVisible = () => setIsPasswordVisible((previewState) => !previewState);
 
   const HasMessageError = () => {
-    if (error && !!errorText) {
+    if (error) {
       return (
         <ViewText>
           <Text>{errorText}</Text>

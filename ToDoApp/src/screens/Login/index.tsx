@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Input} from '~/components/Input';
-import {Button} from '~/components/Button';
-import {Container, ViewLogin, Logo, InputView} from './styles';
-import {PageViewComponent} from '~/components/PageView';
-import AppLogo from '~/assets/images/Logo.png';
 import {useTranslation} from 'react-i18next';
 import {useAuth} from '~/hooks/useAuth';
+
+import AppLogo from '~/assets/images/Logo.png';
+import {Input} from '~/components/Input';
+import {Button} from '~/components/Button';
+import {PageViewComponent} from '~/components/PageView';
+import {Container, ViewLogin, Logo, Form} from './styles';
 
 export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,63 +16,47 @@ export const Login: React.FC = () => {
 
   const {signIn, authLoading} = useAuth();
   const {t} = useTranslation();
+  const width = 308;
 
-  const widthButton = 308;
-  const widthInput = 307;
+  const verifyLogin = () => signIn({email, password}).catch(() => setError(true));
 
-  const VerifyLogin = async () => {
-    await signIn({email, password}).catch((error) => {
-      setError(true);
-      throw new Error(error);
-    });
+  const timeout = (bool: boolean, setter: Function) => {
+    if (bool) setTimeout(() => setter(false), 5000);
   };
 
-  useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 5000);
-    }
-  }, []);
+  useEffect(() => timeout(isLoading, setIsLoading), []);
+  useEffect(() => timeout(error, setError), [error]);
 
-  useEffect(() => {
-    if (error === true) {
-      setTimeout(() => {
-        setError(false);
-      }, 5000);
-    }
-  });
   return (
     <PageViewComponent isLoading={isLoading}>
       <Container>
         <Logo source={AppLogo} />
 
         <ViewLogin>
-          <InputView>
+          <Form>
             <Input
               value={email}
-              onChangeText={setEmail}
+              width={width}
               error={error}
-              width={widthInput}
+              onChangeText={setEmail}
               placeholder="Digite seu email"
             />
-          </InputView>
-          <InputView>
+
             <Input
+              secureText
+              width={width}
+              error={error}
               value={password}
               onChangeText={setPassword}
-              error={error}
-              errorText={'Dados inválidos! Verifique as informações \ninseridas.'}
-              secureText={true}
-              width={widthInput}
               placeholder="Digite sua senha"
+              errorText={'Dados inválidos! Verifique as informações inseridas.'}
             />
-          </InputView>
+          </Form>
           <Button
-            loading={authLoading}
-            width={widthButton}
             text="Entrar"
-            onClick={VerifyLogin}
+            width={width}
+            loading={authLoading}
+            onClick={verifyLogin}
           />
         </ViewLogin>
       </Container>

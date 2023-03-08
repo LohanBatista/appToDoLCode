@@ -25,6 +25,4 @@ export const Text = styled.Text`
 export const Loader = styled.ActivityIndicator.attrs(({theme}) => ({
   size: 'large',
   color: theme.colors.gray_100,
-}))`
-  margin-top: ${Responsive.heightInPixelToDP(11)}px;
-`;
+}))``;

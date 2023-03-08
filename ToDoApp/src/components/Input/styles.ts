@@ -2,28 +2,27 @@ import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 interface ViewProps {
+  width?: number;
   error?: boolean;
   isActive: boolean;
-  width?: number;
 }
 
 export const Container = styled.View`
-  justify-content: center;
   align-items: center;
-`;
-
-export const InputText = styled.TextInput`
-  color: ${({theme}) => theme.colors.gray_100};
-  font-size: ${Responsive.fontInPixelToDP(16)}px;
-  font-family: ${({theme}) => theme.fonts.inter_regular};
-  padding-left: ${Responsive.widthInPixelToDP(20)}px;
-
-  width: ${Responsive.widthInPixelToDP(270)}px;
+  justify-content: center;
 `;
 
 export const InputView = styled.View<ViewProps>`
-  align-items: center;
   flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+
+  height: ${Responsive.heightInPixelToDP(54)}px;
+  width: ${({width}) => width || Responsive.widthInPixelToDP(275)}px;
+
+  border-radius: 6px;
+
   border: 1px solid
     ${({theme, error, isActive}) =>
       error
@@ -31,27 +30,36 @@ export const InputView = styled.View<ViewProps>`
         : isActive
         ? theme.colors.purpleDark
         : theme.colors.gray_700};
-  border-radius: 6px;
-  justify-content: space-between;
-  width: ${({width}) => width || Responsive.widthInPixelToDP(275)}px;
-  height: ${Responsive.heightInPixelToDP(54)}px;
+
   background-color: ${({theme}) => theme.colors.gray_500};
 `;
 
+export const InputText = styled.TextInput`
+  width: ${Responsive.widthInPixelToDP(270)}px;
+  padding-left: ${Responsive.widthInPixelToDP(20)}px;
+
+  color: ${({theme}) => theme.colors.gray_100};
+
+  font-size: ${Responsive.fontInPixelToDP(16)}px;
+  font-family: ${({theme}) => theme.fonts.inter_regular};
+`;
+
+export const ViewText = styled.View`
+  width: ${Responsive.widthInPixelToDP(300)}px;
+`;
+
 export const Text = styled.Text`
-  margin-top: ${Responsive.heightInPixelToDP(8)}px;
+  color: ${({theme}) => theme.colors.danger};
   font-size: ${Responsive.fontInPixelToDP(14)}px;
   font-family: ${({theme}) => theme.fonts.inter_regular};
-  color: ${({theme}) => theme.colors.danger};
 `;
 
 export const Button = styled.TouchableOpacity`
-  width: ${Responsive.widthInPixelToDP(25)}px;
-  height: ${Responsive.heightInPixelToDP(25)}px;
   align-items: center;
   justify-content: center;
+
+  width: ${Responsive.widthInPixelToDP(25)}px;
+  height: ${Responsive.heightInPixelToDP(25)}px;
+
   margin-right: ${Responsive.widthInPixelToDP(20)}px;
-`;
-export const ViewText = styled.View`
-  flex-wrap: wrap;
 `;

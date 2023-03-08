@@ -7,23 +7,27 @@ export const Container = styled.View`
   justify-content: flex-end;
 `;
 
+export const Logo = styled.Image`
+  width: ${Responsive.widthInPixelToDP(180)}px;
+  height: ${Responsive.heightInPixelToDP(50)}px;
+  right: ${Responsive.widthInPixelToDP(15)}px;
+  margin-bottom: ${Responsive.RFValue(170)}px;
+`;
+
 export const ViewLogin = styled.View`
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+
+  padding-bottom: ${Responsive.RFValue(30)}px;
 
   width: ${Responsive.widthInPixelToDP(450)}px;
-  height: ${Responsive.heightInPixelToDP(260)}px;
+  height: ${Responsive.heightInPixelToDP(285)}px;
 
   background-color: ${({theme}) => theme.colors.gray_500};
 `;
 
-export const Logo = styled.Image`
-  width: ${Responsive.widthInPixelToDP(180)}px;
-  height: ${Responsive.heightInPixelToDP(50)}px;
-  right: ${Responsive.widthInPixelToDP(10)}px;
-  margin-bottom: ${Responsive.RFValue(150)}px;
-`;
-
-export const InputView = styled.View`
-  margin-bottom: ${Responsive.heightInPixelToDP(15)}px;
+export const Form = styled.View`
+  justify-content: space-between;
+  margin-bottom: ${Responsive.RFValue(38)}px;
+  height: ${Responsive.heightInPixelToDP(130)}px;
 `;
