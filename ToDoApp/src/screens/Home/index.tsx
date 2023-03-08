@@ -3,7 +3,6 @@ import {useTranslation} from 'react-i18next';
 
 import {Tasks} from '~/components/Task';
 import {Input} from '~/components/Input';
-import {Button} from '~/components/Button';
 import {OptionTask} from '~/components/OptionTask';
 import {PageViewComponent} from '~/components/PageView';
 
@@ -25,12 +24,18 @@ import {
   ViewInput,
   ButtonHome,
 } from './styles';
+import {getAllTasksByUser} from '~/storage/task/getAllTasksByUser';
+import {useAuth} from '~/hooks/useAuth';
+import {setTasksByUser} from '~/storage/task/setTasksByUser';
 
 export const Home: React.FC = () => {
+  const {user, signOut} = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [task, setTask] = useState('');
   const [list, setList] = useState<Task[]>([]);
-  const [actualList, setActualList] = useState<'created' | 'done'>('created');
+  const [actualSelectedList, setActualSelectedList] = useState<'created' | 'done'>(
+    'created',
+  );
   const [filterList, setFilterList] = useState<Task[]>([]);
   const [disableButton, setDisableButton] = useState(false);
   const {t: translate} = useTranslation();
@@ -87,7 +92,7 @@ export const Home: React.FC = () => {
   const createdTask = (list: Task[]) => {
     if (list.length > 0) {
       const tasksCreated = list.filter((task: Task) => task.isDone === false);
-      setActualList('created');
+      setActualSelectedList('created');
       setFilterList(tasksCreated);
     } else {
       setFilterList([]);
@@ -97,26 +102,42 @@ export const Home: React.FC = () => {
   const doneTask = (list: Task[]) => {
     if (list.length > 0) {
       const tasksFinalized = list.filter((task: Task) => task.isDone === true);
-      setActualList('done');
+      setActualSelectedList('done');
       setFilterList(tasksFinalized);
     } else {
       setFilterList([]);
     }
   };
+  const Logout = () => signOut();
 
   useEffect(() => {
     if (isLoading) setTimeout(() => setIsLoading(false), 5000);
   }, []);
 
   useEffect(() => {
-    if (actualList === 'created') return createdTask(list);
-    if (actualList === 'done') return doneTask(list);
+    if (actualSelectedList === 'created') return createdTask(list);
+    if (actualSelectedList === 'done') return doneTask(list);
   }, [list]);
 
   useEffect(() => {
     if (task.length > 4) return setDisableButton(false);
     else return setDisableButton(true);
   }, [task]);
+
+  useEffect(() => {
+    const LoadedStorageTasks = async () => {
+      const data: Task[] = (await getAllTasksByUser(user?.user_id as string)) ?? [];
+      setList(data);
+    };
+    LoadedStorageTasks();
+  }, []);
+
+  useEffect(() => {
+    const SetStorageTasks = async () => {
+      await setTasksByUser(user?.user_id as string, list);
+    };
+    SetStorageTasks();
+  }, [list]);
 
   return (
     <PageViewComponent isLoading={isLoading}>
@@ -161,6 +182,7 @@ export const Home: React.FC = () => {
           />
 
           {isListEmpty && <EmptyList />}
+          <ButtonHome width={200} text="Logout" onClick={Logout} />
         </Content>
       </ViewColum>
     </PageViewComponent>
