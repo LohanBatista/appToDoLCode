@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "user_id": "9876543210",
+      "email": "lohan@lcode37.com",
+      "password": "l0h@n123*"
+    },
+    {
+      "id": 1,
+      "user_id": "AS446as65A6S57D4S",
+      "email": "eduarda@lcode37.com",
+      "password": "dud7$"
+    },
+    {
+      "id": 2,
+      "user_id": "3ebfc875-1648-4705-98da-56a5bda1f8fa",
+      "email": "joao@lcode37.com",
+      "password": "j040!1!1"
+    },
+    {
+      "id": 3,
+      "user_id": "3ebfc875-1648-4705-98da-87968d6877",
+      "email": "pedro@lcode37.com",
+      "password": "p3dro4rtur***"
+    }
+  ]
+}
