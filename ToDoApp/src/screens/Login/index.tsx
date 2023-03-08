@@ -4,8 +4,8 @@ import {Button} from '~/components/Button';
 import {Container, ViewLogin, Logo, InputView} from './styles';
 import {PageViewComponent} from '~/components/PageView';
 import AppLogo from '~/assets/images/Logo.png';
-import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import {useAuth} from '~/hooks/useAuth';
 
 export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,21 +13,17 @@ export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const {signIn, authLoading} = useAuth();
   const {t} = useTranslation();
-  const {navigate} = useNavigation();
-
-  const emailTeste = 'joao';
-  const senhaTeste = '123';
 
   const widthButton = 308;
   const widthInput = 307;
 
-  const VerifyLogin = () => {
-    if (email === emailTeste && password === senhaTeste) {
-      navigate('Home');
-    } else {
+  const VerifyLogin = async () => {
+    await signIn({email, password}).catch((error) => {
       setError(true);
-    }
+      throw new Error(error);
+    });
   };
 
   useEffect(() => {
@@ -71,7 +67,12 @@ export const Login: React.FC = () => {
               placeholder="Digite sua senha"
             />
           </InputView>
-          <Button width={widthButton} text="Entrar" onClick={VerifyLogin} />
+          <Button
+            loading={authLoading}
+            width={widthButton}
+            text="Entrar"
+            onClick={VerifyLogin}
+          />
         </ViewLogin>
       </Container>
     </PageViewComponent>
