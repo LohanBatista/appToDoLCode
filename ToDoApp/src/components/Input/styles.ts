@@ -7,7 +7,10 @@ interface ViewProps {
   width?: number;
 }
 
-export const Container = styled.View``;
+export const Container = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
 
 export const InputText = styled.TextInput`
   color: ${({theme}) => theme.colors.gray_100};
@@ -37,7 +40,7 @@ export const InputView = styled.View<ViewProps>`
 
 export const Text = styled.Text`
   margin-top: ${Responsive.heightInPixelToDP(8)}px;
-  font-size: ${Responsive.fontInPixelToDP(15)}px;
+  font-size: ${Responsive.fontInPixelToDP(14)}px;
   font-family: ${({theme}) => theme.fonts.inter_regular};
   color: ${({theme}) => theme.colors.danger};
 `;
@@ -49,4 +52,6 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   margin-right: ${Responsive.widthInPixelToDP(20)}px;
 `;
-export const ViewText = styled.View``;
+export const ViewText = styled.View`
+  flex-wrap: wrap;
+`;
