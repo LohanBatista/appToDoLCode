@@ -23,6 +23,7 @@ import {
   ListObj,
   ViewInput,
   ButtonHome,
+  ButtonLogout,
 } from './styles';
 import {getAllTasksByUser} from '~/storage/task/getAllTasksByUser';
 import {useAuth} from '~/hooks/useAuth';
@@ -143,6 +144,7 @@ export const Home: React.FC = () => {
     <PageViewComponent isLoading={isLoading}>
       <ViewColum>
         <Header>
+          <ButtonLogout onPress={Logout} />
           <Logo source={AppLogo} />
         </Header>
 
@@ -182,7 +184,6 @@ export const Home: React.FC = () => {
           />
 
           {isListEmpty && <EmptyList />}
-          <ButtonHome width={200} text="Logout" onClick={Logout} />
         </Content>
       </ViewColum>
     </PageViewComponent>
