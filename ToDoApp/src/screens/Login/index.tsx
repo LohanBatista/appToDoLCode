@@ -38,17 +38,18 @@ export const Login: React.FC = () => {
     }
   }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (error === true) {
       setTimeout(() => {
         setError(false);
       }, 5000);
     }
-  }); */
+  });
   return (
     <PageViewComponent isLoading={isLoading}>
       <Container>
         <Logo source={AppLogo} />
+
         <ViewLogin>
           <InputView>
             <Input
@@ -70,11 +71,7 @@ export const Login: React.FC = () => {
               placeholder="Digite sua senha"
             />
           </InputView>
-          <Button
-            width={widthButton}
-            text="Entrar"
-            onClick={() => setError((err) => !err)}
-          />
+          <Button width={widthButton} text="Entrar" onClick={VerifyLogin} />
         </ViewLogin>
       </Container>
     </PageViewComponent>
