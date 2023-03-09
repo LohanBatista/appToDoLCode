@@ -3,8 +3,12 @@
     "name": "ToDoApp",
     "slug": "ToDoApp",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+
+    "splash": {
+      "image": "./src/assets/images/SplashScreen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    }
   }
 }
