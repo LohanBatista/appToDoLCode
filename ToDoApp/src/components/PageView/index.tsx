@@ -1,13 +1,13 @@
-import {StatusBar} from 'react-native';
 import React from 'react';
+import theme from '~/config/theme';
 import AppLogo from '~/assets/images/Logo.png';
+import {StatusBar} from 'react-native';
 import {Container, Logo, LoaderView} from './styles';
 import {LoaderAnimation} from '../LoaderAnimation';
-import theme from '~/config/theme';
 
 interface PageViewProps {
   isLoading: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const PageViewComponent: React.FC<PageViewProps> = (props) => {
