@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useAuth} from '~/hooks/useAuth';
 
-import AppLogo from '~/assets/images/Logo.png';
 import {Input} from '~/components/Input';
+import {Logo} from '~/components/Logo';
 import {Button} from '~/components/Button';
 import {PageViewComponent} from '~/components/PageView';
-import {Container, ViewLogin, Logo, Form} from './styles';
+import {Container, ViewLogin, Form, LogoContainer} from './styles';
 
 export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +20,8 @@ export const Login: React.FC = () => {
 
   const verifyLogin = () => signIn({email, password}).catch(() => setError(true));
 
-  const timeout = (bool: boolean, setter: Function) => {
-    if (bool) setTimeout(() => setter(false), 5000);
+  const timeout = (bool: boolean, set: Function) => {
+    if (bool) setTimeout(() => set((state: boolean) => !state), 5000);
   };
 
   useEffect(() => timeout(isLoading, setIsLoading), []);
@@ -30,7 +30,9 @@ export const Login: React.FC = () => {
   return (
     <PageViewComponent isLoading={isLoading}>
       <Container>
-        <Logo source={AppLogo} />
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
 
         <ViewLogin>
           <Form>

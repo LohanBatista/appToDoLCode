@@ -7,11 +7,9 @@ export const Container = styled.View`
   justify-content: flex-end;
 `;
 
-export const Logo = styled.Image`
-  width: ${Responsive.widthInPixelToDP(180)}px;
-  height: ${Responsive.heightInPixelToDP(50)}px;
-  right: ${Responsive.widthInPixelToDP(15)}px;
-  margin-bottom: ${Responsive.RFValue(170)}px;
+export const LogoContainer = styled.View`
+  right: ${Responsive.widthInPixelToDP(10)}px;
+  margin-bottom: ${Responsive.RFValue(162)}px;
 `;
 
 export const ViewLogin = styled.View`

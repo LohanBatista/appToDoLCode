@@ -17,7 +17,7 @@ export default function App() {
   const [appIsReady, setAppIsReady] = React.useState(false);
   const [fontsLoaded] = useFonts({Inter_400Regular, Inter_700Bold});
 
-  async function prepare() {
+  const prepare = async () => {
     try {
       await ExpoFont.loadAsync({Inter_400Regular, Inter_700Bold});
       await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -26,7 +26,7 @@ export default function App() {
     } finally {
       setAppIsReady(true);
     }
-  }
+  };
 
   const onLayoutRootView = async () => {
     if (appIsReady) await ExpoSplashScreen.hideAsync();
