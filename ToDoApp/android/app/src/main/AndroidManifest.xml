@@ -31,7 +31,7 @@
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
-        android:theme="@style/Theme.App.SplashScreen"
+        android:theme="@style/Theme.SplashScreen"
         android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>

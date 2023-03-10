@@ -11,7 +11,7 @@ import {ThemeProvider} from 'styled-components/native';
 import {View as AppContainer, ViewProps} from 'react-native';
 import {useFonts, Inter_400Regular, Inter_700Bold} from '@expo-google-fonts/inter';
 
-ExpoSplashScreen.preventAutoHideAsync();
+/* ExpoSplashScreen.preventAutoHideAsync(); */
 
 export default function App() {
   const [appIsReady, setAppIsReady] = React.useState(false);
@@ -29,7 +29,7 @@ export default function App() {
   };
 
   const onLayoutRootView = async () => {
-    if (appIsReady) await ExpoSplashScreen.hideAsync();
+    /*     if (appIsReady) await ExpoSplashScreen.hideAsync(); */
   };
 
   const AppInit = () => {
