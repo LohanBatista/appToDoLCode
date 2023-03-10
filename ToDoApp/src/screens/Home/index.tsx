@@ -122,6 +122,7 @@ export const Home: React.FC = () => {
   const optionButtonActionCreated = () => {
     setActualOptionFilter('created'), setTextModal(false);
   };
+
   const optionButtonActionDone = () => {
     setActualOptionFilter('done'), setTextModal(true);
   };
