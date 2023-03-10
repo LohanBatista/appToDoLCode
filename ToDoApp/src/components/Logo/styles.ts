@@ -8,8 +8,6 @@ export type AppLogoProps = {
   height?: number;
 };
 
-export const Container = styled.View``;
-
 export const AppLogo = styled.Image.attrs({
   source: LogoImage,
 } as ImageProps)<AppLogoProps>`

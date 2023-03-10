@@ -1,71 +1,66 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
+import {useTheme} from 'styled-components/native';
+import {Button} from '../Button';
+import {Task} from '~/interfaces/task';
 import {
+  Header,
   CloseIcon,
-  LogoIcon,
   ModalStyled,
   TextDescription,
-  TwoPoint,
   ViewButton,
   ViewModal,
   ViewLogo,
   ViewBackground,
   ButtonClose,
 } from './styles';
-import {Button} from '../Button';
-import {useTheme} from 'styled-components/native';
+import {Logo} from './Logo';
 
-import {Task} from '~/interfaces/task';
 interface ModalProps {
-  visible: boolean;
   task: Task;
-  actionVisible: () => void;
+  visible: boolean;
   actionDelete: () => void;
-  actionFinalization: () => void;
+  actionVisible: () => void;
+  actionUpdate: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({
-  visible,
-  task,
-  actionVisible,
-  actionDelete,
-  actionFinalization,
-}) => {
+export const Modal: React.FC<ModalProps> = (props) => {
+  const {visible, task, actionVisible, actionDelete, actionUpdate} = props;
   const {t: translate} = useTranslation();
   const theme = useTheme();
 
   const actionButton = () => {
-    actionFinalization();
+    actionUpdate();
     actionVisible();
   };
 
   return (
-    <ModalStyled
-      animationType="slide"
-      transparent={true}
-      visible={visible}
-      onRequestClose={actionVisible}>
+    <ModalStyled visible={visible} onRequestClose={actionVisible}>
       <ViewBackground>
         <ViewModal>
-          <ButtonClose onPress={actionVisible}>
-            <CloseIcon />
-          </ButtonClose>
-          <ViewLogo>
-            <LogoIcon />
-            <TwoPoint />
-          </ViewLogo>
+          <Header>
+            <ViewLogo>
+              <Logo />
+            </ViewLogo>
+
+            <ButtonClose onPress={actionVisible}>
+              <CloseIcon />
+            </ButtonClose>
+          </Header>
+
           <TextDescription>{task.description}</TextDescription>
+
           <ViewButton>
             <Button
-              width={150}
+              width={140}
               onClick={actionDelete}
               background={theme.colors.danger}
-              text={translate('components.modal.exclude') || ''}
+              text={translate('components.modal.exclude') as string}
             />
             <Button
-              width={150}
+              width={140}
               onClick={actionButton}
-              text={translate('components.modal.finalize') || ''}
+              text={translate('components.modal.finalize') as string}
             />
           </ViewButton>
         </ViewModal>

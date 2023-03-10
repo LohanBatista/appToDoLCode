@@ -6,10 +6,10 @@ import {Modal} from '../Modal';
 interface TaskComponentProps {
   task: Task;
   onDelete: () => void;
-  onFinalization: () => void;
+  onUpdated: () => void;
 }
 
-export const Tasks = ({task, onDelete, onFinalization}: TaskComponentProps) => {
+export const Tasks = ({task, onDelete, onUpdated}: TaskComponentProps) => {
   const [visible, setVisible] = useState(false);
 
   function toggleVisibleModal() {
@@ -27,9 +27,9 @@ export const Tasks = ({task, onDelete, onFinalization}: TaskComponentProps) => {
       <Modal
         task={task}
         visible={visible}
-        actionVisible={toggleVisibleModal}
         actionDelete={onDelete}
-        actionFinalization={onFinalization}
+        actionUpdate={onUpdated}
+        actionVisible={toggleVisibleModal}
       />
     </>
   );

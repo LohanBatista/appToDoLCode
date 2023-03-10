@@ -5,17 +5,23 @@ interface OptionTaskProps {
   color?: string;
 }
 
-export const Task = styled.Text<OptionTaskProps>`
-  font-family: ${({theme}) => theme.fonts.inter_bold};
-  font-size: ${Responsive.fontInPixelToDP(14)}px;
-  line-height: ${Responsive.fontInPixelToDP(17)}px;
+export const Container = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
 
+export const Label = styled.Text<OptionTaskProps>`
+  font-size: ${Responsive.fontInPixelToDP(14)}px;
+  font-family: ${({theme}) => theme.fonts.inter_bold};
+
+  line-height: ${Responsive.fontInPixelToDP(17)}px;
   color: ${({color, theme}) => color || theme.colors.blue};
 `;
 
 export const ViewCount = styled.View`
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin-left: ${Responsive.widthInPixelToDP(8)}px;
 
   width: ${Responsive.widthInPixelToDP(25)}px;
@@ -24,12 +30,6 @@ export const ViewCount = styled.View`
   border-radius: ${Responsive.RFValue(50)}px;
 
   background-color: ${({theme}) => theme.colors.gray_400};
-`;
-
-export const ViewFlex = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
 `;
 
 export const NumberCount = styled.Text`

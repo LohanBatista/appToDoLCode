@@ -1,12 +1,11 @@
 import React from 'react';
-import {Container, AppLogoProps, AppLogo} from './styles';
+import {AppLogo} from './styles';
 
-type Props = AppLogoProps & {};
+type Props = {
+  width?: number;
+  height?: number;
+};
 
-export const Logo: React.FC = ({height, width}: Props) => {
-  return (
-    <Container>
-      <AppLogo width={width} height={height} />
-    </Container>
-  );
+export const Logo: React.FC<Props> = ({height, width}) => {
+  return <AppLogo width={width} height={height} />;
 };

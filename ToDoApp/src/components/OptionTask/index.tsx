@@ -1,26 +1,25 @@
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {ViewCount, Task, ViewFlex, NumberCount, Button} from './styles';
+import {ViewCount, Label, Container, NumberCount, Button} from './styles';
 
 interface OptionTaskProps {
-  count: () => number;
+  count: number;
   action: () => void;
   color?: string;
   text: string;
 }
 
 export const OptionTask: React.FC<OptionTaskProps> = ({count, action, text, color}) => {
-  const {t: translate} = useTranslation();
-  const labelCount = count() ?? 0;
+  const labelCount = count ?? 0;
 
   return (
-    <ViewFlex>
+    <Container>
       <Button onPress={action}>
-        <Task color={color}>{text}</Task>
+        <Label color={color}>{text}</Label>
       </Button>
+
       <ViewCount>
         <NumberCount>{labelCount}</NumberCount>
       </ViewCount>
-    </ViewFlex>
+    </Container>
   );
 };

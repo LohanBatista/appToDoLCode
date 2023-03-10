@@ -54,6 +54,7 @@ export const Login: React.FC = () => {
               errorText={'Dados inválidos! Verifique as informações inseridas.'}
             />
           </Form>
+
           <Button
             text="Entrar"
             width={width}

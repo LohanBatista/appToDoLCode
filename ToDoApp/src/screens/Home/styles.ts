@@ -1,31 +1,52 @@
 import styled from 'styled-components/native';
-import {FlatList, FlatListProps} from 'react-native';
 import {Task} from '~/interfaces/task';
-import {Responsive} from '~/config/ResponsiveFontsTheme';
 import {Button} from '~/components/Button';
-
-export const ButtonHome = styled(Button)`
-  margin-left: ${Responsive.widthInPixelToDP(10)}px;
-`;
+import {FontAwesome5} from '@expo/vector-icons';
+import {FlatList, FlatListProps} from 'react-native';
+import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const ViewColum = styled.SafeAreaView`
   flex: 1;
+  align-items: center;
   background-color: ${({theme}) => theme.colors.gray_600};
 `;
 
 export const Header = styled.View`
-  position: absolute;
-  width: ${Responsive.widthInPixelToDP(375)}px;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
   height: ${Responsive.heightInPixelToDP(173)}px;
+
   background-color: ${({theme}) => theme.colors.gray_700};
 `;
 
-export const Logo = styled.Image`
-  position: absolute;
-  width: ${Responsive.widthInPixelToDP(110.34)}px;
+export const ButtonLogout = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+
+  bottom: ${Responsive.RFValue(5)}px;
+  right: ${Responsive.RFValue(100)}px;
+  border-radius: ${Responsive.RFValue(15)}px;
+  width: ${Responsive.widthInPixelToDP(30)}px;
+  height: ${Responsive.heightInPixelToDP(30)}px;
+  background-color: ${({theme}) => theme.colors.purpleDark};
+`;
+
+export const IconLogout = styled(FontAwesome5).attrs(({theme}) => ({
+  name: 'power-off',
+  size: Responsive.RFValue(17),
+  color: theme.colors.gray_200,
+}))``;
+
+export const LogoContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  right: ${Responsive.RFValue(15)}px;
   height: ${Responsive.heightInPixelToDP(32)}px;
-  top: ${Responsive.heightInPixelToDP(70)}px;
-  left: ${Responsive.widthInPixelToDP(132)}px;
+  width: ${Responsive.widthInPixelToDP(110.34)}px;
 `;
 
 export const Content = styled.View`
@@ -34,30 +55,26 @@ export const Content = styled.View`
 
 export const ViewInput = styled.View`
   flex-direction: row;
-  margin-top: ${Responsive.heightInPixelToDP(142)}px;
+  bottom: ${Responsive.RFValue(35)}px;
+`;
+
+export const AddButton = styled(Button)`
+  margin-left: ${Responsive.widthInPixelToDP(10)}px;
 `;
 
 export const Counters = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding: ${Responsive.widthInPixelToDP(24)}px 0px;
+
+  margin-bottom: ${Responsive.RFValue(20)}px;
 `;
 
-export const Empty = styled.Image`
-  margin-bottom: ${Responsive.heightInPixelToDP(500)}px;
-  justify-content: center;
-  align-items: center;
+export const Empty = styled.Image``;
+
+export const TaskListContainer = styled.View`
+  flex: 1;
 `;
 
-export const ListObj = styled(
+export const TaskList = styled(
   FlatList as new (props: FlatListProps<Task>) => FlatList<Task>,
 )``;
-
-export const ButtonLogout = styled.TouchableOpacity`
-  width: ${Responsive.widthInPixelToDP(25)}px;
-  height: ${Responsive.heightInPixelToDP(25)}px;
-  border-radius: 30px;
-  background-color: ${({theme}) => theme.colors.purpleDark};
-  margin-top: ${Responsive.heightInPixelToDP(60)}px;
-  margin-left: ${Responsive.widthInPixelToDP(330)}px;
-`;
