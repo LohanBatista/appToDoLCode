@@ -3,7 +3,7 @@
   <item android:drawable="@color/splashscreen_background"/>
   <item>
     <bitmap
-        android:src="@drawable/splash"
+        android:src="@drawable/splashcreen_image"
         android:gravity="center"
         />
   </item>
