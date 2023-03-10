@@ -155,6 +155,7 @@ export const Home: React.FC = () => {
           <ViewInput>
             <Input
               value={task}
+              width={270}
               onChangeText={setTask}
               placeholder={translate('screens.home.placeholder')}
             />
