@@ -7,7 +7,10 @@
       },
       "modal": {
         "exclude": "Excluir",
-        "finalize": "Finalizar"
+        "finalize": "Finalizar",
+        "editable": "Editar",
+        "logout": "Deslogar",
+        "return": "Voltar"
       }
     },
     "screens": {
@@ -15,10 +18,14 @@
         "title": "Olá mundo!"
       },
       "home": {
-        "placeholder": "Adicione uma nova tarefa"
+        "placeholder": "Adicione uma nova tarefa",
+        "textLogout": "Deseja realmente deslogar ?"
       },
       "login": {
-        "error": "Dados inválidos! Verifique as informações inseridas."
+        "placeholderPassword": "Digite sua senha",
+        "placeholderEmail": "Digite seu email",
+        "error": "Dados inválidos! Verifique as informações inseridas.",
+        "entry": "Entrar"
       }
     }
   }

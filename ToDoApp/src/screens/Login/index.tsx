@@ -7,6 +7,7 @@ import {Logo} from '~/components/Logo';
 import {Button} from '~/components/Button';
 import {PageViewComponent} from '~/components/PageView';
 import {Container, ViewLogin, Form, LogoContainer} from './styles';
+import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
 export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,10 +16,12 @@ export const Login: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const {signIn, authLoading} = useAuth();
-  const {t} = useTranslation();
+  const {t: translate} = useTranslation();
   const width = 308;
 
-  const verifyLogin = () => signIn({email, password}).catch(() => setError(true));
+  const verifyLogin = () => {
+    signIn({email, password}).catch(() => setError(true));
+  };
 
   const timeout = (bool: boolean, set: Function) => {
     if (bool) setTimeout(() => set((state: boolean) => !state), 5000);
@@ -29,40 +32,42 @@ export const Login: React.FC = () => {
 
   return (
     <PageViewComponent isLoading={isLoading}>
-      <Container>
-        <LogoContainer>
-          <Logo />
-        </LogoContainer>
+      <TouchableWithoutFeedback>
+        <Container>
+          <LogoContainer>
+            <Logo />
+          </LogoContainer>
 
-        <ViewLogin>
-          <Form>
-            <Input
-              value={email}
+          <ViewLogin>
+            <Form>
+              <Input
+                value={email}
+                width={width}
+                error={error}
+                onChangeText={setEmail}
+                placeholder={translate('screens.login.placeholderEmail')}
+              />
+
+              <Input
+                secureText
+                width={width}
+                error={error}
+                value={password}
+                onChangeText={setPassword}
+                placeholder={translate('screens.login.placeholderPassword')}
+                errorText={translate('screens.login.error') as string}
+              />
+            </Form>
+
+            <Button
+              text={translate('screens.login.entry') as string}
               width={width}
-              error={error}
-              onChangeText={setEmail}
-              placeholder="Digite seu email"
+              loading={authLoading}
+              onClick={verifyLogin}
             />
-
-            <Input
-              secureText
-              width={width}
-              error={error}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Digite sua senha"
-              errorText={'Dados inválidos! Verifique as informações inseridas.'}
-            />
-          </Form>
-
-          <Button
-            text="Entrar"
-            width={width}
-            loading={authLoading}
-            onClick={verifyLogin}
-          />
-        </ViewLogin>
-      </Container>
+          </ViewLogin>
+        </Container>
+      </TouchableWithoutFeedback>
     </PageViewComponent>
   );
 };

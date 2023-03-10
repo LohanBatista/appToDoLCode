@@ -6,7 +6,7 @@ export const Button = styled.TouchableOpacity``;
 export const ViewTask = styled.View`
   width: 100%;
   min-height: ${Responsive.heightInPixelToDP(64)}px;
-
+  justify-content: center;
   align-items: center;
 
   padding: 12px;

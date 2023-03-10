@@ -7,6 +7,6 @@ export async function setTasksByUser(user_id: string, tasks: Task[]) {
     const key = `${taskCollection}-${user_id}`;
     await AsyncStorage.setItem(key, JSON.stringify(tasks));
   } catch (error) {
-    throw new Error('Armazenamento: problema em salvar a tarefa');
+    throw error;
   }
 }

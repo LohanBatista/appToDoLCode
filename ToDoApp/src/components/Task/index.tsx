@@ -2,15 +2,24 @@ import React, {useState} from 'react';
 import {ViewTask, TaskText, Button} from './styles';
 import {Task} from '~/interfaces/task';
 import {Modal} from '../Modal';
-
+import {useTranslation} from 'react-i18next';
 interface TaskComponentProps {
-  task: Task;
+  task?: Task;
   onDelete: () => void;
   onUpdated: () => void;
+  verifyModalDone?: boolean;
+  textModal: string;
 }
 
-export const Tasks = ({task, onDelete, onUpdated}: TaskComponentProps) => {
+export const Tasks = ({
+  task,
+  onDelete,
+  onUpdated,
+  verifyModalDone,
+  textModal,
+}: TaskComponentProps) => {
   const [visible, setVisible] = useState(false);
+  const {t: translate} = useTranslation();
 
   function toggleVisibleModal() {
     setVisible((actualVisible) => !actualVisible);
@@ -20,7 +29,7 @@ export const Tasks = ({task, onDelete, onUpdated}: TaskComponentProps) => {
     <>
       <Button onPress={toggleVisibleModal}>
         <ViewTask>
-          <TaskText>{task.description}</TaskText>
+          <TaskText numberOfLines={2}>{task ? task.description : ''}</TaskText>
         </ViewTask>
       </Button>
 
@@ -30,6 +39,10 @@ export const Tasks = ({task, onDelete, onUpdated}: TaskComponentProps) => {
         actionDelete={onDelete}
         actionUpdate={onUpdated}
         actionVisible={toggleVisibleModal}
+        textButton={translate('components.modal.exclude')}
+        textButtonOption={
+          verifyModalDone ? textModal : translate('components.modal.finalize')
+        }
       />
     </>
   );

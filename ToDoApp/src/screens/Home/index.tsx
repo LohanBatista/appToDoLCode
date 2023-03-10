@@ -29,6 +29,7 @@ import {
   IconLogout,
   TaskListContainer,
 } from './styles';
+import {Modal} from '~/components/Modal';
 
 type optionsFilter = 'created' | 'done';
 
@@ -39,12 +40,15 @@ export const Home: React.FC = () => {
   const [filterList, setFilterList] = useState<Task[]>([]);
   const [list, setList] = useState<Task[]>([]);
   const [task, setTask] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [textModal, setTextModal] = useState(false);
 
   const {t: translate} = useTranslation();
   const {user, signOut} = useAuth();
   const {colors} = useTheme();
 
   const isEmptyList = list.length === 0;
+  const hasMinimumOfCharacters = !!task && task.length > 4;
   const amountedCreatedTasks = list.filter((task: Task) => !task.isDone).length;
   const amountedDoneTasks = list.filter((task: Task) => task.isDone).length;
 
@@ -74,22 +78,27 @@ export const Home: React.FC = () => {
 
   const buttonUsabilityController = () => {
     return () => {
-      let hasMinimumOfCharacters = !!task && task.length > 4;
       if (hasMinimumOfCharacters) return setDisableButton(false);
       else return setDisableButton(true);
     };
   };
 
   const handleAddTask = () => {
-    const newTask: Task = {
-      id: Utils.getNewId(),
-      description: task,
-      isDone: false,
-      date: Utils.getNewDate(),
-      timestamp: Utils.getTimestamp(),
-    };
+    const filterTask = list.filter((item: Task) => item.description == task);
+    if (!hasMinimumOfCharacters || filterTask.length > 0) {
+      return;
+    } else {
+      const newTask: Task = {
+        id: Utils.getNewId(),
+        description: task,
+        isDone: false,
+        date: Utils.getNewDate(),
+        timestamp: Utils.getTimestamp(),
+      };
 
-    setList((actualList) => [...actualList, newTask]);
+      setList((actualList) => [...actualList, newTask]);
+      setTask('');
+    }
   };
 
   const handleDelete = (id: string) => {
@@ -110,8 +119,12 @@ export const Home: React.FC = () => {
     setList([...filteredList, data]);
   };
 
-  const optionButtonActionCreated = () => setActualOptionFilter('created');
-  const optionButtonActionDone = () => setActualOptionFilter('done');
+  const optionButtonActionCreated = () => {
+    setActualOptionFilter('created'), setTextModal(false);
+  };
+  const optionButtonActionDone = () => {
+    setActualOptionFilter('done'), setTextModal(true);
+  };
 
   const optionFilterCreatedTasks = () => {
     if (!isEmptyList) setFilterList(list.filter((task: Task) => !task.isDone));
@@ -127,7 +140,15 @@ export const Home: React.FC = () => {
     const onDelete = () => handleDelete(item.id);
     const onUpdated = () => handleUpdated(item);
 
-    return <Tasks task={item} onDelete={onDelete} onUpdated={onUpdated} />;
+    return (
+      <Tasks
+        textModal={translate('components.modal.editable')}
+        verifyModalDone={textModal}
+        task={item}
+        onDelete={onDelete}
+        onUpdated={onUpdated}
+      />
+    );
   };
 
   const EmptyListComponent = () => <Empty source={AppEmpty} />;
@@ -138,11 +159,24 @@ export const Home: React.FC = () => {
   useEffect(buttonUsabilityController, [task]);
   useEffect(listController, [list, actualOptionFilter]);
 
+  const ModalLogout = () => {
+    setVisible(true);
+  };
+
   return (
     <PageViewComponent isLoading={isLoading}>
       <ViewColum>
         <Header>
-          <ButtonLogout onPress={logout}>
+          <Modal
+            text={translate('screens.home.textLogout') as string}
+            visible={visible}
+            textButton={translate('components.modal.logout')}
+            textButtonOption={translate('components.modal.return')}
+            actionVisible={() => setVisible(false)}
+            actionUpdate={() => setVisible(false)}
+            actionDelete={logout}
+          />
+          <ButtonLogout onPress={() => ModalLogout()}>
             <IconLogout />
           </ButtonLogout>
 
@@ -154,6 +188,7 @@ export const Home: React.FC = () => {
         <Content>
           <ViewInput>
             <Input
+              onSubmit={handleAddTask}
               value={task}
               onChangeText={setTask}
               placeholder={translate('screens.home.placeholder')}

@@ -1,23 +1,31 @@
 {
   "translation": {
     "components": {
-      "newTasks": {
-        "title": "Created"
-      },
-      "doneTasks": {
-        "title": "Done"
+      "optionTask": {
+        "titleOne": "Created",
+        "titleTwo": "Dones"
       },
       "modal": {
         "exclude": "Delete",
-        "finalize": "Finalize"
+        "finalize": "Finalize",
+        "editable": "Edit",
+        "logout": "Logout",
+        "return": "Back"
       }
     },
     "screens": {
       "exemple": {
-        "title": "Hello world!"
+        "title": "Hello world!!"
       },
       "home": {
-        "placeholder": "Add a new task"
+        "placeholder": "Add a new task",
+        "textLogout": "Do you really want to log out?"
+      },
+      "login": {
+        "placeholderPassword": "Enter your Password",
+        "placeholderEmail": "Enter your Email",
+        "error": "Invalid data! Check the information entered.",
+        "entry": "Login"
       }
     }
   }

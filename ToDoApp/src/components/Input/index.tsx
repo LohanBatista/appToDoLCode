@@ -10,10 +10,11 @@ interface InputProps extends TextInputProps {
   secureText?: boolean;
   placeholder: string;
   width?: number;
+  onSubmit?: () => void;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
-  const {error, errorText, secureText, placeholder, width, ...rest} = props;
+  const {error, errorText, secureText, placeholder, width, onSubmit, ...rest} = props;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isOnBlur, setIsOnBlur] = useState(false);
@@ -41,6 +42,7 @@ export const Input: React.FC<InputProps> = (props) => {
     <Container>
       <InputView width={width} error={error} isActive={isOnBlur}>
         <InputText
+          onSubmitEditing={onSubmit}
           autoCorrect={false}
           cursorColor={colors.gray_100}
           placeholder={placeholder}

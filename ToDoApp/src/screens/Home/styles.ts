@@ -7,6 +7,7 @@ import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 export const ViewColum = styled.SafeAreaView`
   flex: 1;
+
   align-items: center;
   background-color: ${({theme}) => theme.colors.gray_600};
 `;

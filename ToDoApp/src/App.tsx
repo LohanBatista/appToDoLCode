@@ -7,7 +7,7 @@ import {Routes} from './routes';
 import {AppProvider} from './hooks/provider';
 import {I18nextProvider} from 'react-i18next';
 import {ThemeProvider} from 'styled-components/native';
-import {View as AppContainer, ViewProps} from 'react-native';
+import {StatusBar, View as AppContainer, ViewProps} from 'react-native';
 import {useFonts, Inter_400Regular, Inter_700Bold} from '@expo-google-fonts/inter';
 
 export default function App() {
@@ -32,6 +32,11 @@ export default function App() {
 
     return (
       <AppContainer {...containerProps}>
+        <StatusBar
+          translucent
+          barStyle={'light-content'}
+          backgroundColor={theme.colors.gray_700}
+        />
         <Routes />
       </AppContainer>
     );

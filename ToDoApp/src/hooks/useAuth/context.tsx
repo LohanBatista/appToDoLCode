@@ -56,7 +56,7 @@ function AuthProvider({children}: AuthProviderProps) {
       }
     } catch (error) {
       setHasAuthError(true);
-      throw new Error('Falha: Parece que houve um problema, tente mais tarde');
+      throw error;
     } finally {
       setAuthLoading(false);
     }
@@ -69,7 +69,7 @@ function AuthProvider({children}: AuthProviderProps) {
       setAuthLoading(true);
       setUserStorage(false);
     } catch (error) {
-      throw new Error('Falha: ocorreu uma falha ao sair do app');
+      throw error;
     } finally {
       setAuthLoading(false);
     }

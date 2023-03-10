@@ -8,6 +8,6 @@ export async function getAllTasksByUser(user_id: string) {
     const data = response ? JSON.parse(response) : [];
     return data;
   } catch (error) {
-    throw new Error('Armazenamento: problema em recuperar as tarefas');
+    throw error;
   }
 }

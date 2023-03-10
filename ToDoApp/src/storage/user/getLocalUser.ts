@@ -13,6 +13,6 @@ export async function getLocalUser(): Promise<User | null> {
 
     return null;
   } catch (error) {
-    throw new Error('Falha no armazenamento local');
+    throw error;
   }
 }

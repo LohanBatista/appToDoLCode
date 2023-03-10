@@ -17,15 +17,27 @@ import {
 import {Logo} from './Logo';
 
 interface ModalProps {
-  task: Task;
+  task?: Task;
   visible: boolean;
+  textButton: string;
+  textButtonOption: string;
+  text?: string;
   actionDelete: () => void;
   actionVisible: () => void;
   actionUpdate: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = (props) => {
-  const {visible, task, actionVisible, actionDelete, actionUpdate} = props;
+  const {
+    visible,
+    task,
+    textButton,
+    textButtonOption,
+    actionVisible,
+    actionDelete,
+    actionUpdate,
+    text = '',
+  } = props;
   const {t: translate} = useTranslation();
   const theme = useTheme();
 
@@ -48,20 +60,16 @@ export const Modal: React.FC<ModalProps> = (props) => {
             </ButtonClose>
           </Header>
 
-          <TextDescription>{task.description}</TextDescription>
+          <TextDescription>{task ? task.description : text}</TextDescription>
 
           <ViewButton>
             <Button
               width={140}
               onClick={actionDelete}
               background={theme.colors.danger}
-              text={translate('components.modal.exclude') as string}
+              text={textButton}
             />
-            <Button
-              width={140}
-              onClick={actionButton}
-              text={translate('components.modal.finalize') as string}
-            />
+            <Button width={140} onClick={actionButton} text={textButtonOption} />
           </ViewButton>
         </ViewModal>
       </ViewBackground>
