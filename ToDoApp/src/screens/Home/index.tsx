@@ -34,7 +34,7 @@ type optionsFilter = 'created' | 'done';
 
 export const Home: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [disableButton, setDisableButton] = useState(false);
+  const [disableButton, setDisableButton] = useState(true);
   const [actualOptionFilter, setActualOptionFilter] = useState<optionsFilter>('created');
   const [filterList, setFilterList] = useState<Task[]>([]);
   const [list, setList] = useState<Task[]>([]);
@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
 
   const buttonUsabilityController = () => {
     return () => {
-      const hasMinimumOfCharacters = task.length > 4;
+      let hasMinimumOfCharacters = !!task && task.length > 4;
       if (hasMinimumOfCharacters) return setDisableButton(false);
       else return setDisableButton(true);
     };
