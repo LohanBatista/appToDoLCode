@@ -2,7 +2,6 @@ import React from 'react';
 import i18n from '~/locales/i18n';
 import theme from '~/config/theme';
 import * as ExpoFont from 'expo-font';
-import * as ExpoSplashScreen from 'expo-splash-screen';
 
 import {Routes} from './routes';
 import {AppProvider} from './hooks/provider';
@@ -11,11 +10,9 @@ import {ThemeProvider} from 'styled-components/native';
 import {View as AppContainer, ViewProps} from 'react-native';
 import {useFonts, Inter_400Regular, Inter_700Bold} from '@expo-google-fonts/inter';
 
-/* ExpoSplashScreen.preventAutoHideAsync(); */
-
 export default function App() {
-  const [appIsReady, setAppIsReady] = React.useState(false);
   const [fontsLoaded] = useFonts({Inter_400Regular, Inter_700Bold});
+  const [appIsReady, setAppIsReady] = React.useState(false);
 
   const prepare = async () => {
     try {
@@ -28,13 +25,8 @@ export default function App() {
     }
   };
 
-  const onLayoutRootView = async () => {
-    /*     if (appIsReady) await ExpoSplashScreen.hideAsync(); */
-  };
-
   const AppInit = () => {
     const containerProps: ViewProps = {
-      onLayout: onLayoutRootView,
       style: {flex: 1, backgroundColor: theme.colors.gray_700},
     };
 

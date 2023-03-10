@@ -9,6 +9,11 @@
       "image": "./assets/splash.png",
       "backgroundColor": "#0D0D0D",
       "resizeMode": "cover"
+    },
+    "androidStatusBar": {
+      "translucent": true,
+      "barStyle": "dark-content",
+      "backgroundColor": "#0D0D0D"
     }
   }
 }
