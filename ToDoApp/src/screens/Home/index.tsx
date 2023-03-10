@@ -190,6 +190,7 @@ export const Home: React.FC = () => {
             <Input
               onSubmit={handleAddTask}
               value={task}
+              width={270}
               onChangeText={setTask}
               placeholder={translate('screens.home.placeholder')}
             />

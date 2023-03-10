@@ -19,7 +19,8 @@ export const InputView = styled.View<ViewProps>`
   justify-content: space-between;
 
   height: ${Responsive.heightInPixelToDP(54)}px;
-  width: ${({width}) => width || Responsive.widthInPixelToDP(275)}px;
+  width: ${({width}) =>
+    !!width ? Responsive.widthInPixelToDP(width) : Responsive.widthInPixelToDP(275)}px;
 
   border-radius: 6px;
 
@@ -35,7 +36,7 @@ export const InputView = styled.View<ViewProps>`
 `;
 
 export const InputText = styled.TextInput`
-  width: ${Responsive.widthInPixelToDP(270)}px;
+  width: ${Responsive.widthInPixelToDP(240)}px;
   padding-left: ${Responsive.widthInPixelToDP(20)}px;
 
   color: ${({theme}) => theme.colors.gray_100};

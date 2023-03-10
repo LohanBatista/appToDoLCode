@@ -56,6 +56,7 @@ export const Content = styled.View`
 
 export const ViewInput = styled.View`
   flex-direction: row;
+  justify-content: space-between;
   bottom: ${Responsive.RFValue(35)}px;
 `;
 
