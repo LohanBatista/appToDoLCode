@@ -1,10 +1,12 @@
 import React from 'react';
+import {Keyboard} from 'react-native';
 import {Button as ButtonComponent, Loader, Text} from './styles';
 import IconButton from '~/assets/icons/plus.svg';
 
 interface ButtonProps {
   text?: string;
-  onClick?: () => void;
+  onClick: () => void;
+  onSubmit?: () => void;
   disable?: boolean;
   loading?: boolean;
   hasIconPlus?: boolean;
@@ -13,8 +15,9 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  text,
+  text = '',
   onClick,
+  onSubmit,
   disable,
   loading,
   hasIconPlus,
@@ -29,7 +32,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <ButtonComponent
-      onPress={onClick}
+      onPress={() => {
+        Keyboard.dismiss();
+        onClick();
+      }}
+      onAccessibilityAction={onSubmit}
       disabled={disable}
       background={background}
       width={width}>

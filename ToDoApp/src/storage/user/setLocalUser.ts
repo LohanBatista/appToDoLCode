@@ -7,6 +7,6 @@ export async function setLocalUser(user: User) {
     const data = JSON.stringify([user]);
     await AsyncStorage.setItem(userCollection, data);
   } catch (error) {
-    throw new Error('Falha no armazenamento local');
+    throw error;
   }
 }

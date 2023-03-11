@@ -38,17 +38,25 @@ function AuthProvider({children}: AuthProviderProps) {
       const response: Response = (await api.get(query)) ?? ({} as Response);
       const data: User = response?.data[0];
 
-      if (data.email !== null) {
-        if (data.password === credentials.password) {
+      const isValidEmail = data.email !== null && data.email === credentials.email;
+      const isValidPassword = data.password === credentials.password;
+
+      if (isValidEmail) {
+        if (isValidPassword) {
+          await setLocalUser(data);
           setUser(data);
-          setLocalUser(data);
+          setUserStorage(true);
           setAuthLoading(false);
           setHasAuthError(false);
+        } else {
+          throw new Error();
         }
+      } else {
+        throw new Error();
       }
     } catch (error) {
       setHasAuthError(true);
-      throw new Error('Falha: Parece que houve um problema, tente mais tarde');
+      throw error;
     } finally {
       setAuthLoading(false);
     }
@@ -58,10 +66,10 @@ function AuthProvider({children}: AuthProviderProps) {
     try {
       setUser(null);
       removeLocalUser();
-      setUserStorage(false);
       setAuthLoading(true);
+      setUserStorage(false);
     } catch (error) {
-      throw new Error('Falha: ocorreu uma falha ao sair do app');
+      throw error;
     } finally {
       setAuthLoading(false);
     }
@@ -72,7 +80,7 @@ function AuthProvider({children}: AuthProviderProps) {
       const response = await getLocalUser();
 
       if (response?.user_id !== null) {
-        setUser(response);
+        setUser(response as User);
         setUserStorage(true);
       }
     }

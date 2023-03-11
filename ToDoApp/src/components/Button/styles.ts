@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
 
 interface ButtonProps {
-  background?: string;
   width?: number;
+  background?: string;
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
@@ -18,13 +18,11 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 export const Text = styled.Text`
   color: ${({theme}) => theme.colors.gray_100};
-  font-size: ${Responsive.fontInPixelToDP(14)}px;
+  font-size: ${Responsive.fontInPixelToDP(16)}px;
   font-family: ${({theme}) => theme.fonts.inter_bold};
 `;
 
 export const Loader = styled.ActivityIndicator.attrs(({theme}) => ({
   size: 'large',
   color: theme.colors.gray_100,
-}))`
-  margin-top: ${Responsive.heightInPixelToDP(11)}px;
-`;
+}))``;
