@@ -11,6 +11,10 @@
         "editable": "Editar",
         "logout": "Deslogar",
         "return": "Voltar"
+      },
+      "emptyList": {
+        "textBold": "Você não tem tarefas cadastradas ainda",
+        "textRegular": "Crie tarefas e organize itens a fazer"
       }
     },
     "screens": {

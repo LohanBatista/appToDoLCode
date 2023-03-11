@@ -71,8 +71,6 @@ export const Counters = styled.View`
   margin-bottom: ${Responsive.RFValue(20)}px;
 `;
 
-export const Empty = styled.Image``;
-
 export const TaskListContainer = styled.View`
   flex: 1;
 `;

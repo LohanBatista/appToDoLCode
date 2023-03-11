@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import {ViewTask, TaskText, Button} from './styles';
-import {Task} from '~/interfaces/task';
+import {Task as ITask} from '~/interfaces/task';
 import {Modal} from '../Modal';
 import {useTranslation} from 'react-i18next';
 interface TaskComponentProps {
-  task?: Task;
+  task?: ITask;
   onDelete: () => void;
   onUpdated: () => void;
   verifyModalDone?: boolean;
   textModal: string;
 }
 
-export const Tasks = ({
+export const Task = ({
   task,
   onDelete,
   onUpdated,

@@ -3,20 +3,20 @@ import {useTheme} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
 
 import {Logo} from '~/components/Logo';
-import {Tasks} from '~/components/Task';
+import {Task} from '~/components/Task';
 import {Input} from '~/components/Input';
+import {Modal} from '~/components/Modal';
+import {EmptyLis} from '~/components/EmptyList';
 import {OptionTask} from '~/components/OptionTask';
 import {PageViewComponent} from '~/components/PageView';
 
 import {Utils} from '~/utils';
-import {Task} from '~/interfaces/task';
+import {Task as ITask} from '~/interfaces/task';
 import {useAuth} from '~/hooks/useAuth';
-import AppEmpty from '~/assets/images/Empty.png';
 import {setTasksByUser} from '~/storage/task/setTasksByUser';
 import {getAllTasksByUser} from '~/storage/task/getAllTasksByUser';
 
 import {
-  Empty,
   Header,
   Content,
   Counters,
@@ -29,7 +29,6 @@ import {
   IconLogout,
   TaskListContainer,
 } from './styles';
-import {Modal} from '~/components/Modal';
 
 type optionsFilter = 'created' | 'done';
 
@@ -37,8 +36,8 @@ export const Home: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [disableButton, setDisableButton] = useState(true);
   const [actualOptionFilter, setActualOptionFilter] = useState<optionsFilter>('created');
-  const [filterList, setFilterList] = useState<Task[]>([]);
-  const [list, setList] = useState<Task[]>([]);
+  const [filterList, setFilterList] = useState<ITask[]>([]);
+  const [list, setList] = useState<ITask[]>([]);
   const [task, setTask] = useState('');
   const [visible, setVisible] = useState(false);
   const [textModal, setTextModal] = useState(false);
@@ -49,8 +48,9 @@ export const Home: React.FC = () => {
 
   const isEmptyList = list.length === 0;
   const hasMinimumOfCharacters = !!task && task.length > 4;
-  const amountedCreatedTasks = list.filter((task: Task) => !task.isDone).length;
-  const amountedDoneTasks = list.filter((task: Task) => task.isDone).length;
+  const haveEqualTask = list.filter((item) => item.description == task).length > 0;
+  const amountedCreatedTasks = list.filter((task: ITask) => !task.isDone).length;
+  const amountedDoneTasks = list.filter((task: ITask) => task.isDone).length;
 
   const homeIsReady = () => {
     loadedStorageTasks();
@@ -58,7 +58,7 @@ export const Home: React.FC = () => {
   };
 
   const loadedStorageTasks = async () => {
-    const data: Task[] = (await getAllTasksByUser(user?.user_id as string)) ?? [];
+    const data: ITask[] = (await getAllTasksByUser(user?.user_id as string)) ?? [];
     setList(data);
   };
 
@@ -77,38 +77,33 @@ export const Home: React.FC = () => {
   };
 
   const buttonUsabilityController = () => {
-    return () => {
-      if (hasMinimumOfCharacters) return setDisableButton(false);
-      else return setDisableButton(true);
-    };
+    if (hasMinimumOfCharacters) return setDisableButton(false);
+    else return setDisableButton(true);
   };
 
   const handleAddTask = () => {
-    const filterTask = list.filter((item: Task) => item.description == task);
-    if (!hasMinimumOfCharacters || filterTask.length > 0) {
-      return;
-    } else {
-      const newTask: Task = {
-        id: Utils.getNewId(),
-        description: task,
-        isDone: false,
-        date: Utils.getNewDate(),
-        timestamp: Utils.getTimestamp(),
-      };
+    if (!hasMinimumOfCharacters || haveEqualTask) return;
 
-      setList((actualList) => [...actualList, newTask]);
-      setTask('');
-    }
+    const newTask: ITask = {
+      id: Utils.getNewId(),
+      description: task,
+      isDone: false,
+      date: Utils.getNewDate(),
+      timestamp: Utils.getTimestamp(),
+    };
+
+    setList((actualList) => [...actualList, newTask]);
+    setTask('');
   };
 
   const handleDelete = (id: string) => {
-    setList((actualList) => actualList.filter((item: Task) => item.id != id));
+    setList((actualList) => actualList.filter((item: ITask) => item.id != id));
   };
 
-  const handleUpdated = (task: Task) => {
-    const filteredList = list.filter((item: Task) => item.id !== task.id);
+  const handleUpdated = (task: ITask) => {
+    const filteredList = list.filter((item: ITask) => item.id !== task.id);
 
-    const data: Task = {
+    const data: ITask = {
       id: task.id,
       description: task.description,
       isDone: !task.isDone,
@@ -120,39 +115,39 @@ export const Home: React.FC = () => {
   };
 
   const optionButtonActionCreated = () => {
-    setActualOptionFilter('created'), setTextModal(false);
+    setActualOptionFilter('created');
+    setTextModal(false);
   };
 
   const optionButtonActionDone = () => {
-    setActualOptionFilter('done'), setTextModal(true);
+    setActualOptionFilter('done');
+    setTextModal(true);
   };
 
   const optionFilterCreatedTasks = () => {
-    if (!isEmptyList) setFilterList(list.filter((task: Task) => !task.isDone));
+    if (!isEmptyList) setFilterList(list.filter((task: ITask) => !task.isDone));
     else setFilterList([]);
   };
 
   const optionFilterDoneTasks = () => {
-    if (!isEmptyList) setFilterList(list.filter((task: Task) => task.isDone));
+    if (!isEmptyList) setFilterList(list.filter((task: ITask) => task.isDone));
     else setFilterList([]);
   };
 
-  const renderItem = ({item}: {item: Task}) => {
+  const renderItem = ({item}: {item: ITask}) => {
     const onDelete = () => handleDelete(item.id);
     const onUpdated = () => handleUpdated(item);
 
     return (
-      <Tasks
-        textModal={translate('components.modal.editable')}
-        verifyModalDone={textModal}
+      <Task
         task={item}
         onDelete={onDelete}
         onUpdated={onUpdated}
+        verifyModalDone={textModal}
+        textModal={translate('components.modal.editable')}
       />
     );
   };
-
-  const EmptyListComponent = () => <Empty source={AppEmpty} />;
 
   const logout = () => signOut();
 
@@ -169,13 +164,13 @@ export const Home: React.FC = () => {
       <ViewColum>
         <Header>
           <Modal
-            text={translate('screens.home.textLogout') as string}
             visible={visible}
-            textButton={translate('components.modal.logout')}
-            textButtonOption={translate('components.modal.return')}
-            actionVisible={() => setVisible(false)}
-            actionUpdate={() => setVisible(false)}
             actionDelete={logout}
+            actionUpdate={() => setVisible(false)}
+            actionVisible={() => setVisible(false)}
+            textButton={translate('components.modal.logout')}
+            text={translate('screens.home.textLogout') as string}
+            textButtonOption={translate('components.modal.return')}
           />
           <ButtonLogout onPress={() => ModalLogout()}>
             <IconLogout />
@@ -221,8 +216,8 @@ export const Home: React.FC = () => {
             <TaskList
               data={filterList}
               renderItem={renderItem}
+              ListEmptyComponent={EmptyLis}
               keyExtractor={(item) => item.id}
-              ListEmptyComponent={EmptyListComponent}
             />
           </TaskListContainer>
         </Content>
