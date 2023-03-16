@@ -3,8 +3,17 @@
     "name": "ToDoApp",
     "slug": "ToDoApp",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "icon": "./assets/logo.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#0D0D0D",
+      "resizeMode": "cover"
+    },
+    "androidStatusBar": {
+      "translucent": true,
+      "barStyle": "dark-content",
+      "backgroundColor": "#0D0D0D"
+    }
   }
 }

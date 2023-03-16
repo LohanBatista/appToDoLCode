@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
-import {InputText, Text, InputView, Button, Container} from './styles';
+import {InputText, Text, InputView, Button, Container, ViewText} from './styles';
 import {Feather} from '@expo/vector-icons';
 import {useTheme} from 'styled-components/native';
 
@@ -9,10 +9,12 @@ interface InputProps extends TextInputProps {
   errorText?: string;
   secureText?: boolean;
   placeholder: string;
+  width?: number;
+  onSubmit?: () => void;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
-  const {error, errorText, secureText, placeholder, ...rest} = props;
+  const {error, errorText, secureText, placeholder, width, onSubmit, ...rest} = props;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isOnBlur, setIsOnBlur] = useState(false);
@@ -24,10 +26,23 @@ export const Input: React.FC<InputProps> = (props) => {
   const inputNotFocus = () => setIsOnBlur(false);
   const passwordVisible = () => setIsPasswordVisible((previewState) => !previewState);
 
+  const HasMessageError = () => {
+    if (error) {
+      return (
+        <ViewText>
+          <Text>{errorText}</Text>
+        </ViewText>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Container>
-      <InputView error={error} isActive={isOnBlur}>
+      <InputView width={width} error={error} isActive={isOnBlur}>
         <InputText
+          onSubmitEditing={onSubmit}
           autoCorrect={false}
           cursorColor={colors.gray_100}
           placeholder={placeholder}
@@ -44,7 +59,8 @@ export const Input: React.FC<InputProps> = (props) => {
           </Button>
         )}
       </InputView>
-      {error && <Text>{errorText}</Text>}
+
+      <HasMessageError />
     </Container>
   );
 };

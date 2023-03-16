@@ -1,0 +1,36 @@
+{
+  "translation": {
+    "components": {
+      "optionTask": {
+        "titleOne": "Criadas",
+        "titleTwo": "Concluídas"
+      },
+      "modal": {
+        "exclude": "Excluir",
+        "finalize": "Finalizar",
+        "editable": "Editar",
+        "logout": "Deslogar",
+        "return": "Voltar"
+      },
+      "emptyList": {
+        "textBold": "Você não tem tarefas cadastradas ainda",
+        "textRegular": "Crie tarefas e organize itens a fazer"
+      }
+    },
+    "screens": {
+      "exemple": {
+        "title": "Olá mundo!"
+      },
+      "home": {
+        "placeholder": "Adicione uma nova tarefa",
+        "textLogout": "Deseja realmente deslogar ?"
+      },
+      "login": {
+        "placeholderPassword": "Digite sua senha",
+        "placeholderEmail": "Digite seu email",
+        "error": "Dados inválidos! Verifique as informações inseridas.",
+        "entry": "Entrar"
+      }
+    }
+  }
+}

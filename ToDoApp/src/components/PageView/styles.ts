@@ -1,24 +1,26 @@
-import {RFValue} from 'react-native-responsive-fontsize';
-import styled, {css} from 'styled-components/native';
+import styled from 'styled-components/native';
 import {Responsive} from '~/config/ResponsiveFontsTheme';
-import theme from '~/config/theme';
 
 export const Container = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: center;
-  ${({theme}) =>
-    css`
-      background-color: ${theme.colors.gray_700};
-    `};
+  background-color: ${({theme}) => theme.colors.gray_700};
 `;
 
-export const Logo = styled.Image`
-  width: ${Responsive.widthInPixelToDP(169)}px;
-  height: ${Responsive.heightInPixelToDP(48)}px;
-  margin-bottom: ${RFValue(250)}px;
+export const ContainerLoad = styled.View`
+  flex: 1;
+  align-items: center;
 `;
+
+export const LogoContainer = styled.View`
+  right: ${Responsive.RFValue(10)}px;
+  margin-top: ${Responsive.RFValue(290)}px;
+`;
+
 export const LoaderView = styled.View`
-  flex-direction: column;
-  top: ${RFValue(50)}px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: ${Responsive.RFValue(50)}px;
+  width: ${Responsive.widthInPixelToDP(100)}px;
+  height: ${Responsive.heightInPixelToDP(100)}px;
 `;

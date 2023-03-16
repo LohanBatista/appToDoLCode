@@ -1,13 +1,14 @@
-import {StatusBar, View} from 'react-native';
 import React from 'react';
-import AppLogo from '~/assets/images/Logo.png';
-import {Container, Logo, LoaderView} from './styles';
-import {LoaderAnimation} from '../LoaderAnimation';
 import theme from '~/config/theme';
+import AppLogo from '~/assets/images/Logo.png';
+import {StatusBar} from 'react-native';
+import {Container, LogoContainer, LoaderView, ContainerLoad} from './styles';
+import {LoaderAnimation} from '../LoaderAnimation';
+import {Logo} from '../Logo';
 
 interface PageViewProps {
   isLoading: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const PageViewComponent: React.FC<PageViewProps> = (props) => {
@@ -16,12 +17,15 @@ export const PageViewComponent: React.FC<PageViewProps> = (props) => {
   const Loading = () => {
     if (isLoading) {
       return (
-        <>
+        <ContainerLoad>
+          <LogoContainer>
+            <Logo />
+          </LogoContainer>
+
           <LoaderView>
-            <Logo source={AppLogo} />
             <LoaderAnimation />
           </LoaderView>
-        </>
+        </ContainerLoad>
       );
     } else return null;
   };

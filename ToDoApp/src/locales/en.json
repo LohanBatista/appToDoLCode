@@ -1,0 +1,36 @@
+{
+  "translation": {
+    "components": {
+      "optionTask": {
+        "titleOne": "Created",
+        "titleTwo": "Dones"
+      },
+      "modal": {
+        "exclude": "Delete",
+        "finalize": "Finalize",
+        "editable": "Edit",
+        "logout": "Logout",
+        "return": "Back"
+      },
+      "emptyList": {
+        "textBold": "You don't have register tasks yet",
+        "textRegular": "Create tasks and organize your to do itens"
+      }
+    },
+    "screens": {
+      "exemple": {
+        "title": "Hello world!!"
+      },
+      "home": {
+        "placeholder": "Add a new task",
+        "textLogout": "Do you really want to log out?"
+      },
+      "login": {
+        "placeholderPassword": "Enter your Password",
+        "placeholderEmail": "Enter your Email",
+        "error": "Invalid data! Check the information entered.",
+        "entry": "Login"
+      }
+    }
+  }
+}

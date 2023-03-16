@@ -3,11 +3,11 @@ import {Home} from '~/screens/Home';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 export const AppRoutes = () => {
-  const Stack = createNativeStackNavigator();
+  const {Navigator, Screen} = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
+    <Navigator screenOptions={{headerShown: false}}>
+      <Screen name="Home" component={Home} />
+    </Navigator>
   );
 };
